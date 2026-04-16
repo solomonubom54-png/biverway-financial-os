@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Biverway Financial OS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-/* ═══════════════════════════════════════
+/* ══════════════════════════════════════
    DESIGN SYSTEM
-═══════════════════════════════════════ */
+══════════════════════════════════════ */
 :root {
   --bg-base:     #080a0e;
   --bg-card:     #0d1017;
@@ -45,7 +45,6 @@ html, body {
   background: var(--bg-base);
   color: var(--cream);
   font-family: var(--font-disp);
-  font-size: 16px;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -57,114 +56,43 @@ html, body {
 .app { max-width: 820px; margin: 0 auto; padding: 0 20px 80px; }
 
 /* ── MASTHEAD ── */
-.masthead {
-  padding: 32px 0 22px;
-  border-bottom: 1px solid var(--gold-line);
-  margin-bottom: 28px;
-}
-.masthead-label {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: block;
-  margin-bottom: 10px;
-}
-.masthead h1 {
-  font-family: var(--font-disp);
-  font-size: clamp(1.4rem, 5vw, 1.75rem);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--white);
-  text-transform: uppercase;
-  line-height: 1.1;
-  margin-bottom: 6px;
-}
-.masthead-sub {
-  font-size: 0.72rem;
-  color: var(--cream-mute);
-  font-weight: 300;
-  letter-spacing: 0.04em;
-}
+.masthead { padding: 32px 0 22px; border-bottom: 1px solid var(--gold-line); margin-bottom: 28px; }
+.masthead-label { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 10px; }
+.masthead h1 { font-family: var(--font-disp); font-size: clamp(1.3rem, 5vw, 1.75rem); font-weight: 700; letter-spacing: -0.01em; color: var(--white); text-transform: uppercase; line-height: 1.1; margin-bottom: 6px; }
+.masthead-sub { font-size: 0.72rem; color: var(--cream-mute); font-weight: 300; letter-spacing: 0.04em; }
+
+/* ── SECTION BLOCK — spacing between sections ── */
+.section-block { margin-top: 36px; padding-top: 4px; }
+.section-block:first-of-type { margin-top: 0; }
 
 /* ── SECTION LABEL ── */
-.section-label {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold);
-  padding-bottom: 10px;
-  margin: 28px 0 14px;
-  border-bottom: 1px solid var(--gold-line);
-  display: block;
-}
+.section-label { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); padding-bottom: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--gold-line); display: block; }
 
 /* ── USER BAR ── */
-.userbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0 16px;
-  border-bottom: 1px solid var(--border-soft);
-  margin-bottom: 4px;
-}
-.userbar-email {
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  color: var(--cream-mute);
-  letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.online-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  display: inline-block;
-  flex-shrink: 0;
-}
+.userbar { display: flex; align-items: center; justify-content: space-between; padding: 10px 0 16px; border-bottom: 1px solid var(--border-soft); margin-bottom: 4px; }
+.userbar-email { font-family: var(--font-mono); font-size: 0.63rem; color: var(--cream-mute); letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px; }
+.online-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; flex-shrink: 0; }
 
-/* ── PERIOD SELECTOR ── */
-.period-row {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  gap: 12px;
-  margin-bottom: 16px;
-}
+/* ── PERIOD ROW ── */
+.period-row { display: flex; flex-direction: row; align-items: flex-end; gap: 12px; margin-bottom: 16px; }
 .period-field { display: flex; flex-direction: column; gap: 5px; }
 .period-field.month-field { flex: 2; min-width: 0; }
 .period-field.year-field  { flex: 1; min-width: 80px; max-width: 110px; }
-.period-field label {
-  font-family: var(--font-mono);
-  font-size: 0.52rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--cream-mute);
-}
 
 /* ── MONTH BADGE ── */
-.month-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--gold-glow);
-  border: 1px solid var(--gold-line);
-  color: var(--gold);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 5px 13px;
-  border-radius: 100px;
-  margin-bottom: 20px;
-}
+.month-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--gold-glow); border: 1px solid var(--gold-line); color: var(--gold); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 13px; border-radius: 100px; margin-bottom: 20px; }
 
-/* ── INPUTS & SELECTS ── */
-input, select, textarea {
+/* ── FIELD LABELS ── */
+.field-label { font-family: var(--font-disp); font-size: 0.67rem; color: var(--cream-mute); font-weight: 400; margin-bottom: 6px; display: block; }
+.field-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ── STANDARD INPUTS ── */
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="text"],
+textarea {
   width: 100%;
   background: var(--bg-input);
   border: 1px solid var(--border-soft);
@@ -174,46 +102,120 @@ input, select, textarea {
   font-size: 0.86rem;
   padding: 10px 13px;
   outline: none;
-  appearance: none;
+  transition: border-color 0.15s;
   -webkit-appearance: none;
+}
+input:focus, textarea:focus { border-color: rgba(201,168,76,0.3); }
+textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; min-height: 70px; color: var(--cream-dim); }
+
+/* ── NATIVE SELECT (period only) ── */
+.native-select {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 10px 13px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
   transition: border-color 0.15s;
 }
-input:focus, select:focus, textarea:focus {
-  border-color: rgba(201,168,76,0.3);
-}
-select option { background: #0a0d13; color: var(--white); }
-textarea {
-  font-family: var(--font-disp);
-  font-size: 0.81rem;
-  resize: vertical;
-  min-height: 70px;
-  color: var(--cream-dim);
-}
-.field-label {
-  font-family: var(--font-disp);
-  font-size: 0.67rem;
-  color: var(--cream-mute);
-  font-weight: 400;
-  margin-bottom: 6px;
-  display: block;
-}
-.field-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.native-select:focus { border-color: rgba(201,168,76,0.3); }
+.native-select option { background: #0a0d13; color: var(--white); }
 
-/* ── BUTTONS ── */
-.btn-primary {
+/* ══════════════════════════════════════
+   CUSTOM DROPDOWN
+══════════════════════════════════════ */
+.custom-select { position: relative; user-select: none; }
+.cs-trigger {
   width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-family: var(--font-disp);
+  font-size: 0.82rem;
+  padding: 10px 36px 10px 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.15s;
+  min-height: 42px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cs-trigger:after {
+  content: '▾';
+  font-size: 0.7rem;
+  color: rgba(232,224,208,0.3);
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.cs-trigger.open { border-color: rgba(201,168,76,0.3); }
+.cs-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: #0a0d13;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.8);
+  z-index: 100;
+  display: none;
+  overflow: hidden;
+}
+.cs-list.open { display: block; }
+.cs-option {
+  padding: 11px 14px;
+  font-family: var(--font-disp);
+  font-size: 0.8rem;
+  color: rgba(232,224,208,0.7);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.1s, color 0.1s;
+}
+.cs-option:last-child { border-bottom: none; }
+.cs-option:hover { background: rgba(255,255,255,0.04); color: var(--white); }
+.cs-option.selected { background: rgba(201,168,76,0.07); color: var(--gold); }
+
+/* ── SMALL CUSTOM SELECT (action bar) ── */
+.cs-trigger.small {
+  font-size: 0.72rem;
+  color: rgba(232,224,208,0.5);
+  padding: 7px 32px 7px 10px;
+  min-height: 34px;
+}
+.cs-list.small .cs-option {
+  font-size: 0.72rem;
+  padding: 9px 12px;
+}
+
+/* ══════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════ */
+.btn-primary {
   background: var(--gold);
   color: #080a0e;
   border: none;
   border-radius: var(--radius-sm);
   font-family: var(--font-disp);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  padding: 12px 20px;
+  padding: 11px 20px;
   cursor: pointer;
   transition: background 0.18s;
+  width: 100%;
+  display: block;
   margin-top: 4px;
 }
 .btn-primary:hover { background: #d4b460; }
@@ -229,34 +231,17 @@ textarea {
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 5px 10px;
+  padding: 6px 11px;
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
+  flex-shrink: 0;
 }
-.btn-ghost:hover {
-  border-color: rgba(201,168,76,0.18);
-  color: rgba(232,224,208,0.52);
-  background: rgba(255,255,255,0.02);
-}
-.btn-ghost.danger:hover {
-  border-color: rgba(192,84,74,0.3);
-  color: rgba(192,84,74,0.7);
-}
-.btn-ghost.confirm {
-  background: rgba(201,168,76,0.08);
-  border-color: var(--gold-line);
-  color: var(--gold);
-  font-size: 0.6rem;
-  padding: 7px 14px;
-}
-.btn-ghost.confirm-no {
-  font-size: 0.6rem;
-  padding: 7px 14px;
-}
+.btn-ghost:hover { border-color: rgba(201,168,76,0.2); color: rgba(232,224,208,0.55); background: rgba(255,255,255,0.02); }
+.btn-ghost.danger:hover { border-color: rgba(192,84,74,0.3); color: rgba(192,84,74,0.75); }
+
 .btn-link {
-  background: none;
-  border: none;
+  background: none; border: none;
   color: var(--cream-mute);
   font-family: var(--font-mono);
   font-size: 0.58rem;
@@ -269,409 +254,172 @@ textarea {
 }
 .btn-link:hover { color: var(--gold); }
 
+/* ── ACTION BAR ── */
+.action-bar { margin-top: 10px; }
+.action-bar-selector { margin-bottom: 8px; }
+.action-bar-btns { display: flex; gap: 8px; flex-wrap: nowrap; }
+
+/* ── CONFIRM ── */
+.confirm-box { background: var(--bg-elevated); border: 1px solid var(--gold-line); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; }
+.confirm-text { font-family: var(--font-disp); font-size: 0.78rem; color: var(--cream-dim); margin-bottom: 12px; line-height: 1.5; }
+.confirm-text strong { color: var(--white); }
+.confirm-text small { font-size: 0.68rem; color: var(--cream-mute); display: block; margin-top: 4px; }
+.confirm-actions { display: flex; gap: 8px; }
+.btn-confirm-yes { background: rgba(201,168,76,0.08); border: 1px solid var(--gold-line); color: var(--gold); font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+.btn-confirm-yes:hover { background: rgba(201,168,76,0.14); }
+.btn-confirm-no { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: rgba(232,224,208,0.28); font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 14px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+.btn-confirm-no:hover { color: rgba(232,224,208,0.55); }
+
+/* ── EDIT FORM ── */
+.edit-wrap { background: var(--bg-elevated); border: 1px solid var(--gold-line); border-radius: var(--radius-sm); padding: 16px; margin: 10px 0 12px; }
+.edit-title { font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 14px; }
+.edit-actions { display: flex; gap: 8px; margin-top: 4px; }
+.edit-actions .btn-primary { flex: 1; width: auto; }
+.edit-cancel { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: rgba(232,224,208,0.28); font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 16px; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.edit-cancel:hover { color: rgba(232,224,208,0.55); border-color: rgba(255,255,255,0.1); }
+
 /* ── EXPANDER ── */
-.expander {
-  background: var(--bg-card);
-  border: 1px solid var(--border-md);
-  border-radius: var(--radius);
-  margin-bottom: 8px;
-  overflow: hidden;
-}
-.expander-header {
-  background: var(--bg-elevated);
-  font-family: var(--font-disp);
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: var(--cream-dim);
-  padding: 12px 18px;
-  border-bottom: 1px solid var(--border-soft);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  user-select: none;
-  transition: color 0.15s;
-}
-.expander-header:hover { color: var(--gold); }
-.expander-header.open { color: var(--gold); border-bottom-color: var(--gold-line); }
-.expander-chevron {
-  font-size: 0.6rem;
-  color: rgba(201,168,76,0.45);
-  transition: transform 0.2s;
-}
+.expander { background: var(--bg-card); border: 1px solid var(--border-md); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; }
+.expander-header { background: var(--bg-elevated); font-family: var(--font-disp); font-size: 0.76rem; font-weight: 500; color: var(--cream-dim); padding: 12px 18px; border-bottom: 1px solid var(--border-soft); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; transition: color 0.15s; }
+.expander-header:hover, .expander-header.open { color: var(--gold); }
+.expander-header.open { border-bottom-color: var(--gold-line); }
+.expander-chevron { font-size: 0.6rem; color: rgba(201,168,76,0.45); transition: transform 0.2s; display: inline-block; }
 .expander-header.open .expander-chevron { transform: rotate(180deg); }
 .expander-body { padding: 18px 18px 20px; display: none; }
 .expander-body.open { display: block; }
 
 /* ── TABS ── */
-.tabs {
-  display: flex;
-  border-bottom: 1px solid var(--border-md);
-  margin-bottom: 20px;
-}
-.tab {
-  font-family: var(--font-disp);
-  font-size: 0.73rem;
-  font-weight: 400;
-  color: var(--cream-mute);
-  padding: 10px 20px;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  background: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  transition: color 0.15s;
-}
+.tabs { display: flex; border-bottom: 1px solid var(--border-md); margin-bottom: 20px; }
+.tab { font-family: var(--font-disp); font-size: 0.73rem; font-weight: 400; color: var(--cream-mute); padding: 10px 20px; border-bottom: 2px solid transparent; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none; transition: color 0.15s; }
 .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
 /* ── KPI GRID ── */
-.kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border-soft);
-  border: 1px solid var(--border-md);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.kpi-cell {
-  background: var(--bg-card);
-  padding: 16px 12px 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 82px;
-}
-.kpi-cell.highlight {
-  background: linear-gradient(160deg, #0d1017 55%, rgba(201,168,76,0.05) 100%);
-}
-.kpi-label-text {
-  font-family: var(--font-mono);
-  font-size: 0.48rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cream-mute);
-  margin-bottom: 8px;
-  display: block;
-  line-height: 1.6;
-}
-.kpi-value-text {
-  font-family: var(--font-mono);
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--white);
-  line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.kpi-cell.highlight .kpi-value-text { font-size: 0.94rem; font-weight: 700; }
-.kpi-value-text.positive { color: var(--green); }
-.kpi-value-text.negative { color: var(--red); }
+.kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border-soft); border: 1px solid var(--border-md); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+.kpi-cell { background: var(--bg-card); padding: 16px 12px 14px; display: flex; flex-direction: column; justify-content: space-between; min-height: 82px; }
+.kpi-cell.highlight { background: linear-gradient(160deg,#0d1017 55%,rgba(201,168,76,0.05) 100%); }
+.kpi-label-t { font-family: var(--font-mono); font-size: 0.48rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-mute); margin-bottom: 8px; display: block; line-height: 1.6; }
+.kpi-value-t { font-family: var(--font-mono); font-size: 0.88rem; font-weight: 600; color: var(--white); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi-cell.highlight .kpi-value-t { font-size: 0.94rem; font-weight: 700; }
+.kpi-value-t.pos { color: var(--green); }
+.kpi-value-t.neg { color: var(--red); }
 
 /* ── RECORD TABLE ── */
-.record-table {
-  border: 1px solid var(--border-md);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  margin-bottom: 16px;
-}
-.record-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 13px 16px;
-  border-bottom: 1px solid var(--border-soft);
-  background: var(--bg-card);
-}
+.record-table { border: 1px solid var(--border-md); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 4px; }
+.record-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 16px; border-bottom: 1px solid var(--border-soft); background: var(--bg-card); }
 .record-row:last-child { border-bottom: none; }
-.record-left { display: flex; flex-direction: column; gap: 3px; }
+.record-left { display: flex; flex-direction: column; gap: 3px; min-width: 0; margin-right: 12px; }
 .record-name { font-size: 0.84rem; font-weight: 500; color: var(--white); }
 .record-meta { font-size: 0.60rem; color: var(--cream-mute); font-family: var(--font-mono); letter-spacing: 0.03em; font-weight: 300; }
-.record-amount { font-family: var(--font-mono); font-size: 1.02rem; font-weight: 600; color: var(--white); }
-
-/* ── ACTION BAR ── */
-.action-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-  flex-wrap: nowrap;
-}
-.action-bar select {
-  flex: 1;
-  min-width: 0;
-  font-size: 0.68rem;
-  color: rgba(232,224,208,0.45);
-  padding: 7px 10px;
-}
-.action-bar-btns {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-/* ── CONFIRM BOX ── */
-.confirm-box {
-  background: var(--bg-elevated);
-  border: 1px solid var(--gold-line);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  margin: 10px 0;
-}
-.confirm-text {
-  font-family: var(--font-disp);
-  font-size: 0.78rem;
-  color: var(--cream-dim);
-  margin-bottom: 12px;
-  line-height: 1.5;
-}
-.confirm-text strong { color: var(--white); }
-.confirm-text small { font-size: 0.68rem; color: var(--cream-mute); display: block; margin-top: 4px; }
-.confirm-actions { display: flex; gap: 8px; }
-
-/* ── EDIT FORM ── */
-.edit-wrap {
-  background: var(--bg-elevated);
-  border: 1px solid var(--gold-line);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  margin: 8px 0 12px;
-}
-.edit-title {
-  font-family: var(--font-mono);
-  font-size: 0.52rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: block;
-  margin-bottom: 14px;
-}
-.edit-actions { display: flex; gap: 8px; margin-top: 12px; }
-.edit-actions .btn-primary { flex: 1; }
+.record-amount { font-family: var(--font-mono); font-size: 1.02rem; font-weight: 600; color: var(--white); flex-shrink: 0; }
 
 /* ── EMPTY STATE ── */
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 28px 20px;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-sm);
-  background: var(--bg-card);
-  margin-bottom: 16px;
-  gap: 7px;
-  text-align: center;
-}
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 20px; border: 1px solid var(--border-soft); border-radius: var(--radius-sm); background: var(--bg-card); margin-bottom: 4px; gap: 7px; text-align: center; }
 .empty-icon { font-size: 1.1rem; opacity: 0.25; }
 .empty-title { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--cream-mute); text-transform: uppercase; }
 .empty-sub { font-family: var(--font-disp); font-size: 0.67rem; color: var(--cream-mute); opacity: 0.6; }
 
 /* ── STATUS BADGE ── */
-.status-badge {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 9px;
-  padding: 10px 14px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  margin-top: 4px;
-  line-height: 1.5;
-  margin-bottom: 18px;
-}
+.status-badge { display: inline-flex; align-items: flex-start; gap: 9px; padding: 10px 14px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.5; margin-bottom: 18px; width: 100%; }
 .status-badge.green  { background: var(--green-bg); color: var(--green); border: 1px solid rgba(76,175,125,0.15); }
 .status-badge.yellow { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(212,146,42,0.15); }
 .status-badge.red    { background: var(--red-bg); color: var(--red); border: 1px solid rgba(192,84,74,0.15); }
 .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; display: inline-block; flex-shrink: 0; margin-top: 5px; }
 
-/* ── INSIGHT ROW ── */
+/* ── INSIGHT ── */
 .insight-row { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--border-soft); }
 .insight-row:last-child { border-bottom: none; }
 .ir-label { font-size: 0.78rem; color: var(--cream-dim); font-weight: 400; }
 .ir-value { font-family: var(--font-mono); font-size: 0.88rem; font-weight: 500; color: var(--white); }
 .ir-sub { font-size: 0.62rem; color: var(--cream-mute); margin-left: 7px; }
 
-/* ── PROGRESS BAR ── */
+/* ── BAR ── */
 .bar-wrap { width: 100%; height: 1px; background: var(--border-md); border-radius: 1px; margin-top: 6px; overflow: hidden; }
-.bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); border-radius: 1px; transition: width 0.4s ease; }
+.bar-fill { height: 100%; background: linear-gradient(90deg,var(--gold-dim),var(--gold)); border-radius: 1px; }
 .bar-row { display: flex; justify-content: space-between; margin-bottom: 7px; }
 .bar-label { font-family: var(--font-disp); font-size: 0.7rem; color: var(--cream-mute); }
 .bar-value { font-family: var(--font-mono); font-size: 0.67rem; color: var(--gold); }
 .bar-section { margin: 18px 0 22px; }
+.section-sub { font-family: var(--font-disp); font-size: 0.7rem; color: var(--cream-mute); margin: 16px 0 8px; }
 
-/* ── ALLOC TABLE ── */
-.alloc-table {
-  border: 1px solid var(--border-md);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  margin: 14px 0 10px;
-}
+/* ── ALLOC ── */
+.alloc-table { border: 1px solid var(--border-md); border-radius: var(--radius-sm); overflow: hidden; margin: 12px 0 10px; }
 .alloc-row { display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border-soft); background: var(--bg-card); }
 .alloc-row:last-child { border-bottom: none; }
 .alloc-cat { flex: 1; font-size: 0.8rem; color: var(--cream-dim); }
 .alloc-pct { font-family: var(--font-mono); font-size: 0.63rem; color: var(--gold); width: 38px; text-align: center; }
 .alloc-amt { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; color: var(--white); text-align: right; min-width: 100px; }
-
-/* ── ALLOC TOTAL ── */
-.alloc-total {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 9px 14px;
-  border: 1px solid rgba(76,175,125,0.15);
-  border-radius: var(--radius-sm);
-  background: var(--green-bg);
-  margin-bottom: 10px;
-}
+.alloc-total { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border: 1px solid rgba(76,175,125,0.15); border-radius: var(--radius-sm); background: var(--green-bg); margin-bottom: 10px; }
 .at-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
 .at-check { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; color: var(--green); }
 
 /* ── LOCK BANNER ── */
-.lock-banner {
-  background: rgba(201,168,76,0.04);
-  border: 1px solid var(--gold-line);
-  border-radius: var(--radius-sm);
-  padding: 11px 16px;
-  margin-bottom: 16px;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.lock-banner { background: rgba(201,168,76,0.04); border: 1px solid var(--gold-line); border-radius: var(--radius-sm); padding: 11px 16px; margin-bottom: 16px; font-family: var(--font-mono); font-size: 0.65rem; color: var(--gold); display: flex; align-items: center; gap: 10px; }
 
 /* ── ALERT ── */
-.alert {
-  padding: 10px 14px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-disp);
-  font-size: 0.74rem;
-  border-left: 2px solid;
-  margin-bottom: 12px;
-  display: none;
-}
+.alert { padding: 10px 14px; border-radius: var(--radius-sm); font-family: var(--font-disp); font-size: 0.74rem; border-left: 2px solid; margin: 10px 0; display: none; }
 .alert.show { display: block; }
 .alert.success { background: var(--green-bg); border-left-color: var(--green); color: var(--green); }
 .alert.error   { background: var(--red-bg); border-left-color: var(--red); color: var(--red); }
 .alert.warning { background: var(--amber-bg); border-left-color: var(--amber); color: var(--amber); }
 
-/* ── FOOTER ── */
-.footer {
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--cream-mute);
-  margin-top: 48px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border-soft);
-}
-
 /* ── SPINNER ── */
-.spinner-overlay {
-  position: fixed; inset: 0;
-  background: rgba(8,10,14,0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
+.spinner-overlay { position: fixed; inset: 0; background: rgba(8,10,14,0.65); display: none; align-items: center; justify-content: center; z-index: 999; }
 .spinner-overlay.show { display: flex; }
-.spinner {
-  width: 28px; height: 28px;
-  border: 2px solid var(--border-md);
-  border-top-color: var(--gold);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
+.spinner { width: 26px; height: 26px; border: 2px solid var(--border-md); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── SECTIONS ── */
-#auth-screen  { display: block; }
-#main-screen  { display: none; }
-#reset-screen { display: none; }
+/* ── FOOTER ── */
+.footer { text-align: center; font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-mute); margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border-soft); }
 
-/* misc */
-p.hint {
-  font-family: var(--font-disp);
-  font-size: 0.67rem;
-  color: var(--cream-mute);
-  margin-top: 12px;
-  line-height: 1.7;
-}
-.section-sub {
-  font-family: var(--font-disp);
-  font-size: 0.7rem;
-  color: var(--cream-mute);
-  margin: 14px 0 8px;
-}
-hr { border: none; border-top: 1px solid var(--border-soft); margin: 20px 0; }
+/* ── SCREENS ── */
+#auth-screen  { display: block; }
+#main-screen  { display: none;  }
+
+.hint { font-family: var(--font-disp); font-size: 0.67rem; color: var(--cream-mute); margin-top: 12px; line-height: 1.7; }
 </style>
 </head>
 <body>
+
 <div class="spinner-overlay" id="spinner"><div class="spinner"></div></div>
 
 <div class="app">
 
-  <!-- ═══════════ MASTHEAD ═══════════ -->
+  <!-- MASTHEAD -->
   <div class="masthead">
     <span class="masthead-label">Biverway &nbsp;·&nbsp; Private Finance</span>
     <h1>Biverway Financial OS</h1>
     <div class="masthead-sub">Your personal wealth command center</div>
   </div>
 
-  <!-- ═══════════ AUTH SCREEN ═══════════ -->
+  <!-- ══════════════ AUTH SCREEN ══════════════ -->
   <div id="auth-screen">
     <div id="reset-screen" style="display:none">
       <span class="section-label">Password Reset</span>
-      <div class="field-group">
-        <label class="field-label">Email address</label>
-        <input type="email" id="reset-email" placeholder="you@example.com">
-      </div>
+      <div class="field-group"><label class="field-label">Email address</label><input type="email" id="reset-email" placeholder="you@example.com"></div>
       <div id="reset-alert" class="alert"></div>
       <button class="btn-primary" onclick="sendReset()">Send Reset Link</button>
       <br><br>
-      <button class="btn-link" onclick="showAuth()">← Back to Sign In</button>
+      <button class="btn-link" onclick="showLoginScreen()">← Back to Sign In</button>
     </div>
 
     <div id="login-screen">
       <div class="tabs">
-        <button class="tab active" onclick="switchTab('signin')">Sign In</button>
-        <button class="tab" onclick="switchTab('signup')">Create Account</button>
+        <button class="tab active" onclick="switchTab(event,'signin')">Sign In</button>
+        <button class="tab" onclick="switchTab(event,'signup')">Create Account</button>
       </div>
-
       <div id="tab-signin" class="tab-panel active">
-        <div class="field-group">
-          <label class="field-label">Email</label>
-          <input type="email" id="login-email" placeholder="you@example.com">
-        </div>
-        <div class="field-group">
-          <label class="field-label">Password</label>
-          <input type="password" id="login-password" placeholder="••••••••">
-        </div>
+        <div class="field-group"><label class="field-label">Email</label><input type="email" id="login-email" placeholder="you@example.com"></div>
+        <div class="field-group"><label class="field-label">Password</label><input type="password" id="login-password" placeholder="••••••••"></div>
         <div id="login-alert" class="alert"></div>
         <button class="btn-primary" onclick="signIn()">Sign In</button>
         <br><br>
-        <button class="btn-link" onclick="showReset()">Forgot password?</button>
+        <button class="btn-link" onclick="showResetScreen()">Forgot password?</button>
       </div>
-
       <div id="tab-signup" class="tab-panel">
-        <div class="field-group">
-          <label class="field-label">Email</label>
-          <input type="email" id="signup-email" placeholder="you@example.com">
-        </div>
-        <div class="field-group">
-          <label class="field-label">Password</label>
-          <input type="password" id="signup-password" placeholder="Min. 6 characters">
-        </div>
+        <div class="field-group"><label class="field-label">Email</label><input type="email" id="signup-email" placeholder="you@example.com"></div>
+        <div class="field-group"><label class="field-label">Password</label><input type="password" id="signup-password" placeholder="Min. 6 characters"></div>
         <div id="signup-alert" class="alert"></div>
         <button class="btn-primary" onclick="signUp()">Create Account</button>
         <p class="hint">After registering, confirm your email before signing in.</p>
@@ -679,173 +427,169 @@ hr { border: none; border-top: 1px solid var(--border-soft); margin: 20px 0; }
     </div>
   </div>
 
-  <!-- ═══════════ MAIN SCREEN ═══════════ -->
+  <!-- ══════════════ MAIN SCREEN ══════════════ -->
   <div id="main-screen">
 
     <!-- User bar -->
     <div class="userbar">
-      <span class="userbar-email">
-        <span class="online-dot"></span>
-        <span id="user-email-display"></span>
-      </span>
+      <span class="userbar-email"><span class="online-dot"></span><span id="user-email-display"></span></span>
       <button class="btn-ghost" onclick="signOut()">Sign Out</button>
     </div>
 
     <!-- Working Period -->
-    <span class="section-label">Working Period</span>
-    <div class="period-row">
-      <div class="period-field month-field">
-        <label class="field-label" for="period-month">Month</label>
-        <select id="period-month" onchange="onPeriodChange()"></select>
+    <div class="section-block">
+      <span class="section-label">Working Period</span>
+      <div class="period-row">
+        <div class="period-field month-field">
+          <label class="field-label" for="period-month">Month</label>
+          <select class="native-select" id="period-month" onchange="onPeriodChange()"></select>
+        </div>
+        <div class="period-field year-field">
+          <label class="field-label" for="period-year">Year</label>
+          <select class="native-select" id="period-year" onchange="onPeriodChange()"></select>
+        </div>
       </div>
-      <div class="period-field year-field">
-        <label class="field-label" for="period-year">Year</label>
-        <select id="period-year" onchange="onPeriodChange()"></select>
-      </div>
+      <div class="month-badge">&#9658;&nbsp;<span id="period-display"></span></div>
+      <div id="lock-banner-top" class="lock-banner" style="display:none">&#128274;&nbsp;<span id="lock-banner-text"></span></div>
     </div>
-    <div class="month-badge">&#9658;&nbsp;<span id="period-display"></span></div>
-    <div id="lock-banner-top" class="lock-banner" style="display:none">&#128274;&nbsp;<span id="lock-banner-text"></span></div>
 
-    <!-- ── INCOME ── -->
-    <span class="section-label">Income</span>
-
-    <div id="add-income-expander" class="expander">
-      <div class="expander-header" onclick="toggleExpander('add-income-expander')">
-        Add Income <span class="expander-chevron">▼</span>
-      </div>
-      <div class="expander-body">
-        <div class="two-col">
-          <div class="field-group">
-            <label class="field-label">Source</label>
-            <select id="inc-source">
-              <option value="Skill">Skill</option>
-              <option value="Salary">Salary</option>
-              <option value="Business">Business</option>
-              <option value="Dividend / Interest">Dividend / Interest</option>
-              <option value="Rental">Rental</option>
-            </select>
+    <!-- Income -->
+    <div class="section-block">
+      <span class="section-label">Income</span>
+      <div id="add-income-expander" class="expander">
+        <div class="expander-header" onclick="toggleExp(this)">Add Income <span class="expander-chevron">▼</span></div>
+        <div class="expander-body">
+          <div class="two-col">
+            <div class="field-group">
+              <label class="field-label">Source</label>
+              <div class="custom-select" id="cs-inc-source">
+                <div class="cs-trigger" onclick="toggleCS('cs-inc-source')"><span class="cs-val">Skill</span></div>
+                <div class="cs-list">
+                  <div class="cs-option selected" onclick="selectCS('cs-inc-source','Skill',this)">Skill</div>
+                  <div class="cs-option" onclick="selectCS('cs-inc-source','Salary',this)">Salary</div>
+                  <div class="cs-option" onclick="selectCS('cs-inc-source','Business',this)">Business</div>
+                  <div class="cs-option" onclick="selectCS('cs-inc-source','Dividend / Interest',this)">Dividend / Interest</div>
+                  <div class="cs-option" onclick="selectCS('cs-inc-source','Rental',this)">Rental</div>
+                </div>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Amount (₦)</label>
+              <input type="number" id="inc-amount" placeholder="0" min="0" step="1000">
+            </div>
           </div>
           <div class="field-group">
-            <label class="field-label">Amount (₦)</label>
-            <input type="number" id="inc-amount" placeholder="0" min="0" step="1000">
+            <label class="field-label">Notes</label>
+            <textarea id="inc-notes" placeholder="Optional context..."></textarea>
           </div>
+          <div id="add-income-alert" class="alert"></div>
+          <button class="btn-primary" onclick="addIncome()">Record Income</button>
         </div>
-        <div class="field-group">
-          <label class="field-label">Notes</label>
-          <textarea id="inc-notes" placeholder="Optional context..."></textarea>
-        </div>
-        <div id="add-income-alert" class="alert"></div>
-        <button class="btn-primary" onclick="addIncome()">Record Income</button>
       </div>
+      <div id="income-list"></div>
+      <div id="income-action-bar"></div>
+      <div id="income-edit-form"></div>
+      <div id="income-confirm-box"></div>
     </div>
 
-    <div id="income-list"></div>
-    <div id="income-action-bar"></div>
-    <div id="income-edit-form" style="display:none"></div>
-    <div id="income-confirm-box" style="display:none"></div>
-
-    <!-- ── EXPENSES ── -->
-    <span class="section-label">Expenses</span>
-
-    <div id="add-expense-expander" class="expander">
-      <div class="expander-header" onclick="toggleExpander('add-expense-expander')">
-        Add Expense <span class="expander-chevron">▼</span>
-      </div>
-      <div class="expander-body">
-        <div class="two-col">
+    <!-- Expenses -->
+    <div class="section-block">
+      <span class="section-label">Expenses</span>
+      <div id="add-expense-expander" class="expander">
+        <div class="expander-header" onclick="toggleExp(this)">Add Expense <span class="expander-chevron">▼</span></div>
+        <div class="expander-body">
+          <div class="two-col">
+            <div class="field-group">
+              <label class="field-label">Category</label>
+              <div class="custom-select" id="cs-exp-cat">
+                <div class="cs-trigger" onclick="toggleCS('cs-exp-cat')"><span class="cs-val">Rent</span></div>
+                <div class="cs-list">
+                  <div class="cs-option selected" onclick="selectCS('cs-exp-cat','Rent',this)">Rent</div>
+                  <div class="cs-option" onclick="selectCS('cs-exp-cat','Food',this)">Food</div>
+                  <div class="cs-option" onclick="selectCS('cs-exp-cat','Utilities',this)">Utilities</div>
+                  <div class="cs-option" onclick="selectCS('cs-exp-cat','Transport',this)">Transport</div>
+                  <div class="cs-option" onclick="selectCS('cs-exp-cat','Healthcare',this)">Healthcare</div>
+                  <div class="cs-option" onclick="selectCS('cs-exp-cat','Education',this)">Education</div>
+                  <div class="cs-option" onclick="selectCS('cs-exp-cat','Subscription',this)">Subscription</div>
+                  <div class="cs-option" onclick="selectCS('cs-exp-cat','Family Support',this)">Family Support</div>
+                </div>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Amount (₦)</label>
+              <input type="number" id="exp-amount" placeholder="0" min="0" step="1000">
+            </div>
+          </div>
           <div class="field-group">
-            <label class="field-label">Category</label>
-            <select id="exp-category">
-              <option>Rent</option><option>Food</option><option>Utilities</option>
-              <option>Transport</option><option>Healthcare</option><option>Education</option>
-              <option>Subscription</option><option>Family Support</option>
-            </select>
+            <label class="field-label">Description</label>
+            <textarea id="exp-desc" placeholder="Optional context..."></textarea>
           </div>
-          <div class="field-group">
-            <label class="field-label">Amount (₦)</label>
-            <input type="number" id="exp-amount" placeholder="0" min="0" step="1000">
-          </div>
+          <div id="add-expense-alert" class="alert"></div>
+          <button class="btn-primary" onclick="addExpense()">Record Expense</button>
         </div>
-        <div class="field-group">
-          <label class="field-label">Description</label>
-          <textarea id="exp-desc" placeholder="Optional context..."></textarea>
-        </div>
-        <div id="add-expense-alert" class="alert"></div>
-        <button class="btn-primary" onclick="addExpense()">Record Expense</button>
+      </div>
+      <div id="expense-list"></div>
+      <div id="expense-action-bar"></div>
+      <div id="expense-edit-form"></div>
+      <div id="expense-confirm-box"></div>
+    </div>
+
+    <!-- Financial Performance -->
+    <div class="section-block">
+      <span class="section-label">Financial Performance</span>
+      <div class="kpi-grid">
+        <div class="kpi-cell"><span class="kpi-label-t">Total<br>Income</span><span class="kpi-value-t" id="kpi-income">₦0</span></div>
+        <div class="kpi-cell"><span class="kpi-label-t">Total<br>Expenses</span><span class="kpi-value-t" id="kpi-expense">₦0</span></div>
+        <div class="kpi-cell highlight"><span class="kpi-label-t">Net<br>Surplus</span><span class="kpi-value-t" id="kpi-surplus">₦0</span></div>
+      </div>
+      <div class="expander" id="perf-expander">
+        <div class="expander-header" onclick="toggleExp(this)">Performance Analysis <span class="expander-chevron">▼</span></div>
+        <div class="expander-body" id="perf-body"></div>
       </div>
     </div>
 
-    <div id="expense-list"></div>
-    <div id="expense-action-bar"></div>
-    <div id="expense-edit-form" style="display:none"></div>
-    <div id="expense-confirm-box" style="display:none"></div>
-
-    <!-- ── PERFORMANCE ── -->
-    <span class="section-label">Financial Performance</span>
-    <div class="kpi-grid">
-      <div class="kpi-cell">
-        <span class="kpi-label-text">Total<br>Income</span>
-        <span class="kpi-value-text" id="kpi-income">₦0</span>
-      </div>
-      <div class="kpi-cell">
-        <span class="kpi-label-text">Total<br>Expenses</span>
-        <span class="kpi-value-text" id="kpi-expense">₦0</span>
-      </div>
-      <div class="kpi-cell highlight">
-        <span class="kpi-label-text">Net<br>Surplus</span>
-        <span class="kpi-value-text" id="kpi-surplus">₦0</span>
+    <!-- Allocation -->
+    <div class="section-block">
+      <span class="section-label">Surplus Allocation</span>
+      <div class="expander" id="alloc-expander">
+        <div class="expander-header" onclick="toggleExp(this)">Allocation Planner <span class="expander-chevron">▼</span></div>
+        <div class="expander-body" id="alloc-body"></div>
       </div>
     </div>
 
-    <div id="performance-expander" class="expander">
-      <div class="expander-header" onclick="toggleExpander('performance-expander')">
-        Performance Analysis <span class="expander-chevron">▼</span>
-      </div>
-      <div class="expander-body" id="performance-body"></div>
+    <!-- Period Control -->
+    <div class="section-block">
+      <span class="section-label">Period Control</span>
+      <div id="lock-section"></div>
     </div>
 
-    <!-- ── ALLOCATION ── -->
-    <span class="section-label">Surplus Allocation</span>
-    <div class="expander">
-      <div class="expander-header" onclick="toggleExpander(this.parentElement)">
-        Allocation Planner <span class="expander-chevron">▼</span>
-      </div>
-      <div class="expander-body" id="allocation-body"></div>
-    </div>
-
-    <!-- ── PERIOD CONTROL ── -->
-    <span class="section-label">Period Control</span>
-    <div id="lock-section"></div>
-
-    <!-- Footer -->
     <div class="footer">Biverway Financial OS &nbsp;·&nbsp; Built on the Biverway Wealth System &nbsp;·&nbsp; <span id="footer-year"></span></div>
-  </div><!-- /main-screen -->
+  </div>
 
 </div><!-- /app -->
 
 <script>
-// ═══════════════════════════════════════
-// SUPABASE INIT
-// ═══════════════════════════════════════
+// ═══════════════════════════
+// SUPABASE
+// ═══════════════════════════
 const SUPA_URL = 'https://eshergeivgosrwcrcvyh.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzaGVyZ2Vpdmdvc3J3Y3JjdnloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MjIwMTAsImV4cCI6MjA4OTk5ODAxMH0.N9NKMbq0QaBAg2LJXGoO5ud6O6NMI6Y3HdY22PljDcs';
-const { createClient } = supabase;
-const db = createClient(SUPA_URL, SUPA_KEY);
+const db = supabase.createClient(SUPA_URL, SUPA_KEY);
 
-// ═══════════════════════════════════════
+// ═══════════════════════════
 // STATE
-// ═══════════════════════════════════════
-let currentUser  = null;
-let currentMonth = '';   // "Apr 2026"
-let incomeData   = [];
-let expenseData  = [];
-let monthLocked  = false;
+// ═══════════════════════════
+let currentUser      = null;
+let currentMonth     = '';
+let incomeData       = [];
+let expenseData      = [];
+let monthLocked      = false;
 let editingIncomeId  = null;
 let editingExpenseId = null;
+let selectedAllocMode = 'Balanced (Default)';
 
-const MONTHS = ['January','February','March','April','May','June',
-                'July','August','September','October','November','December'];
-const INCOME_TYPE = { 'Skill':'Active','Salary':'Active','Business':'Passive','Dividend / Interest':'Passive','Rental':'Passive' };
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const INCOME_TYPE = {'Skill':'Active','Salary':'Active','Business':'Passive','Dividend / Interest':'Passive','Rental':'Passive'};
 const ALLOC_MODES = {
   'Balanced (Default)':  {assetBuilding:35,investing:30,insurance:10,savings:5,emergency:5,lifestyle:10,charity:5},
   'Wealth Acceleration': {assetBuilding:40,investing:30,insurance:10,savings:5,emergency:5,lifestyle:5,charity:5},
@@ -854,96 +598,121 @@ const ALLOC_MODES = {
 };
 const ALLOC_LABELS = {assetBuilding:'Asset Building',investing:'Investing',insurance:'Insurance',savings:'Savings',emergency:'Emergency',lifestyle:'Lifestyle',charity:'Charity'};
 
-// ═══════════════════════════════════════
+// ═══════════════════════════
 // HELPERS
-// ═══════════════════════════════════════
-function $(id) { return document.getElementById(id); }
-function show(id) { $(id).style.display = 'block'; }
-function hide(id) { $(id).style.display = 'none'; }
-function spinner(on) { $('spinner').classList.toggle('show', on); }
+// ═══════════════════════════
+const $  = id => document.getElementById(id);
+const show = id => $(id).style.display = 'block';
+const hide = id => $(id).style.display = 'none';
+const spinner = on => $('spinner').classList.toggle('show', on);
 
 function fmtCompact(n) {
-  const abs = Math.abs(n);
-  if (abs >= 1e6) return '₦' + (n/1e6).toFixed(1) + 'M';
-  if (abs >= 1e3) return '₦' + Math.round(n/1e3) + 'K';
-  return '₦' + n.toLocaleString('en-NG', {maximumFractionDigits:0});
+  const a = Math.abs(n);
+  const prefix = n < 0 ? '-' : '';
+  if (a >= 1e6) return prefix + '₦' + (a/1e6).toFixed(1) + 'M';
+  if (a >= 1e3) return prefix + '₦' + Math.round(a/1e3) + 'K';
+  return prefix + '₦' + a.toLocaleString('en-NG',{maximumFractionDigits:0});
 }
-function fmtFull(n) { return '₦' + n.toLocaleString('en-NG', {minimumFractionDigits:0, maximumFractionDigits:0}); }
-
-function showAlert(elId, msg, type) {
-  const el = $(elId);
+function fmtFull(n) {
+  const a = Math.abs(n);
+  return (n<0?'-':'') + '₦' + a.toLocaleString('en-NG',{minimumFractionDigits:0,maximumFractionDigits:0});
+}
+function showAlert(id, msg, type) {
+  const el = $(id);
+  if (!el) return;
   el.textContent = msg;
   el.className = `alert show ${type}`;
-  setTimeout(() => el.classList.remove('show'), 4000);
+  setTimeout(() => el.classList.remove('show'), 4500);
 }
-
-function shortMonth(name) { return name.slice(0,3); }
-
 function getPeriod() {
   const m = $('period-month').value;
   const y = $('period-year').value;
-  return { monthName: m, year: parseInt(y), short: `${shortMonth(m)} ${y}`, full: `${m} ${y}` };
+  return { monthName:m, year:parseInt(y), short:`${m.slice(0,3)} ${y}`, full:`${m} ${y}` };
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════
+// CUSTOM SELECT
+// ═══════════════════════════
+function toggleCS(id) {
+  const cs = $(id);
+  const trigger = cs.querySelector('.cs-trigger');
+  const list    = cs.querySelector('.cs-list');
+  const isOpen  = list.classList.contains('open');
+  // Close all others
+  document.querySelectorAll('.cs-list.open').forEach(l => { l.classList.remove('open'); l.previousElementSibling.classList.remove('open'); });
+  if (!isOpen) { list.classList.add('open'); trigger.classList.add('open'); }
+}
+function selectCS(id, value, el) {
+  const cs = $(id);
+  cs.querySelector('.cs-val').textContent = value;
+  cs.querySelector('.cs-list').classList.remove('open');
+  cs.querySelector('.cs-trigger').classList.remove('open');
+  cs.querySelectorAll('.cs-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  cs.dataset.value = value;
+}
+function getCSValue(id) { return $(id).dataset.value || $(id).querySelector('.cs-val').textContent; }
+
+// Close dropdowns on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('.custom-select')) {
+    document.querySelectorAll('.cs-list.open').forEach(l => { l.classList.remove('open'); l.previousElementSibling.classList.remove('open'); });
+  }
+});
+
+// ═══════════════════════════
+// EXPANDER
+// ═══════════════════════════
+function toggleExp(hdrEl) {
+  hdrEl.classList.toggle('open');
+  const body = hdrEl.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ═══════════════════════════
 // INIT
-// ═══════════════════════════════════════
+// ═══════════════════════════
 document.addEventListener('DOMContentLoaded', async () => {
   $('footer-year').textContent = new Date().getFullYear();
   buildPeriodSelects();
 
-  const { data: { session } } = await db.auth.getSession();
-  if (session) {
-    currentUser = session.user;
-    enterApp();
-  }
+  const { data:{ session } } = await db.auth.getSession();
+  if (session) { currentUser = session.user; enterApp(); }
 
   db.auth.onAuthStateChange((event, session) => {
-    if (event === 'SIGNED_IN' && session) {
-      currentUser = session.user;
-      enterApp();
-    }
-    if (event === 'SIGNED_OUT') {
-      currentUser = null;
-      show('auth-screen');
-      hide('main-screen');
-    }
+    if (event === 'SIGNED_IN'  && session) { currentUser = session.user; enterApp(); }
+    if (event === 'SIGNED_OUT')             { currentUser = null; hide('main-screen'); show('auth-screen'); }
   });
 });
 
 function buildPeriodSelects() {
   const now = new Date();
-  const curMonth = now.getMonth();
-  const curYear  = now.getFullYear();
-
   const mSel = $('period-month');
-  MONTHS.forEach((m, i) => {
-    const opt = document.createElement('option');
-    opt.value = m; opt.textContent = m;
-    if (i === curMonth) opt.selected = true;
-    mSel.appendChild(opt);
+  MONTHS.forEach((m,i) => {
+    const o = document.createElement('option');
+    o.value = m; o.textContent = m;
+    if (i === now.getMonth()) o.selected = true;
+    mSel.appendChild(o);
   });
-
   const ySel = $('period-year');
-  for (let y = curYear - 4; y <= curYear + 4; y++) {
-    const opt = document.createElement('option');
-    opt.value = y; opt.textContent = y;
-    if (y === curYear) opt.selected = true;
-    ySel.appendChild(opt);
+  const cy   = now.getFullYear();
+  for (let y = cy-4; y <= cy+4; y++) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    if (y === cy) o.selected = true;
+    ySel.appendChild(o);
   }
 }
 
-function onPeriodChange() {
-  loadMonthData();
-}
+function onPeriodChange() { loadMonthData(); }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════
 // AUTH
-// ═══════════════════════════════════════
-function switchTab(tab) {
+// ═══════════════════════════
+function switchTab(e, tab) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
+  e.target.classList.add('active');
   $(`tab-${tab}`).classList.add('active');
 }
 
@@ -954,9 +723,9 @@ async function signIn() {
   const { error } = await db.auth.signInWithPassword({ email, password: pass });
   spinner(false);
   if (error) {
-    const msg = error.message.toLowerCase();
-    if (msg.includes('invalid') || msg.includes('credentials')) showAlert('login-alert','Incorrect email or password.','error');
-    else if (msg.includes('email not confirmed')) showAlert('login-alert','Please confirm your email before signing in.','warning');
+    const m = error.message.toLowerCase();
+    if (m.includes('invalid') || m.includes('credentials')) showAlert('login-alert','Incorrect email or password.','error');
+    else if (m.includes('email not confirmed')) showAlert('login-alert','Please confirm your email before signing in.','warning');
     else showAlert('login-alert', error.message, 'error');
   }
 }
@@ -969,11 +738,11 @@ async function signUp() {
   const { data, error } = await db.auth.signUp({ email, password: pass });
   spinner(false);
   if (error) {
-    const msg = error.message.toLowerCase();
-    if (msg.includes('already registered') || msg.includes('already exists')) showAlert('signup-alert','This email is already registered.','error');
+    const m = error.message.toLowerCase();
+    if (m.includes('already registered') || m.includes('already exists')) showAlert('signup-alert','This email is already registered.','error');
     else showAlert('signup-alert', error.message, 'error');
   } else {
-    if (data.user && data.user.identities && data.user.identities.length === 0) showAlert('signup-alert','This email is already registered.','error');
+    if (data.user?.identities?.length === 0) showAlert('signup-alert','This email is already registered. Please sign in instead.','error');
     else showAlert('signup-alert','Account created. Check your email to confirm before signing in.','success');
   }
 }
@@ -984,8 +753,8 @@ async function signOut() {
   spinner(false);
 }
 
-function showReset() { hide('login-screen'); show('reset-screen'); }
-function showAuth()  { hide('reset-screen'); show('login-screen'); }
+function showResetScreen() { hide('login-screen'); show('reset-screen'); }
+function showLoginScreen()  { hide('reset-screen'); show('login-screen'); }
 
 async function sendReset() {
   const email = $('reset-email').value.trim();
@@ -996,9 +765,9 @@ async function sendReset() {
   else showAlert('reset-alert','Reset link sent — check your inbox.','success');
 }
 
-// ═══════════════════════════════════════
-// APP ENTRY
-// ═══════════════════════════════════════
+// ═══════════════════════════
+// ENTER APP
+// ═══════════════════════════
 function enterApp() {
   hide('auth-screen');
   show('main-screen');
@@ -1006,9 +775,9 @@ function enterApp() {
   loadMonthData();
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════
 // LOAD DATA
-// ═══════════════════════════════════════
+// ═══════════════════════════
 async function loadMonthData() {
   const p = getPeriod();
   currentMonth = p.short;
@@ -1022,13 +791,17 @@ async function loadMonthData() {
   ]);
   spinner(false);
 
-  incomeData  = incRes.data  || [];
-  expenseData = expRes.data  || [];
-  monthLocked = (lockRes.data || []).length > 0;
+  incomeData   = incRes.data  || [];
+  expenseData  = expRes.data  || [];
+  monthLocked  = (lockRes.data || []).length > 0;
 
+  editingIncomeId  = null;
+  editingExpenseId = null;
+
+  // Lock banner
   if (monthLocked) {
     $('lock-banner-top').style.display = 'flex';
-    $('lock-banner-text').textContent = `${p.full} is locked — all records are permanently frozen`;
+    $('lock-banner-text').textContent  = `${p.full} is locked — all records are permanently frozen`;
     $('add-income-expander').style.display  = 'none';
     $('add-expense-expander').style.display = 'none';
   } else {
@@ -1037,9 +810,6 @@ async function loadMonthData() {
     $('add-expense-expander').style.display = 'block';
   }
 
-  editingIncomeId  = null;
-  editingExpenseId = null;
-
   renderIncome();
   renderExpenses();
   renderPerformance();
@@ -1047,24 +817,20 @@ async function loadMonthData() {
   renderLockSection();
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════
 // INCOME
-// ═══════════════════════════════════════
+// ═══════════════════════════
 function renderIncome() {
-  const list = $('income-list');
-  const bar  = $('income-action-bar');
-  const edit = $('income-edit-form');
-  const conf = $('income-confirm-box');
-  hide('income-edit-form');
-  hide('income-confirm-box');
+  $('income-edit-form').innerHTML   = '';
+  $('income-confirm-box').innerHTML = '';
 
   if (incomeData.length === 0) {
-    list.innerHTML = `<div class="empty-state"><span class="empty-icon">↙</span><span class="empty-title">No income recorded</span><span class="empty-sub">Add your first income entry for this period</span></div>`;
-    bar.innerHTML = '';
+    $('income-list').innerHTML = `<div class="empty-state"><span class="empty-icon">↙</span><span class="empty-title">No income recorded</span><span class="empty-sub">Add your first income entry for this period</span></div>`;
+    $('income-action-bar').innerHTML = '';
     return;
   }
 
-  list.innerHTML = `<div class="record-table">${incomeData.map(r => `
+  $('income-list').innerHTML = `<div class="record-table">${incomeData.map(r => `
     <div class="record-row">
       <div class="record-left">
         <span class="record-name">${r.source}</span>
@@ -1073,45 +839,55 @@ function renderIncome() {
       <span class="record-amount">${fmtFull(parseFloat(r.amount))}</span>
     </div>`).join('')}</div>`;
 
-  if (monthLocked) { bar.innerHTML = ''; return; }
+  if (monthLocked) { $('income-action-bar').innerHTML = ''; return; }
+  if (editingIncomeId) { $('income-action-bar').innerHTML = ''; renderIncomeEditForm(); return; }
 
-  if (editingIncomeId) {
-    bar.innerHTML = '';
-    renderIncomeEditForm();
-    return;
-  }
-
-  const opts = incomeData.map((r,i) => `<option value="${r.id}">${i+1}. ${r.source} — ${fmtFull(parseFloat(r.amount))}</option>`).join('');
-  bar.innerHTML = `
+  const opts = incomeData.map((r,i) => `<div class="cs-option${i===0?' selected':''}" onclick="selectCS('cs-inc-sel','${r.id}|${r.source}|${fmtFull(parseFloat(r.amount))}',this)">${i+1}. ${r.source} — ${fmtFull(parseFloat(r.amount))}</div>`).join('');
+  const first = incomeData[0];
+  $('income-action-bar').innerHTML = `
     <div class="action-bar">
-      <select id="inc-sel">${opts}</select>
+      <div class="action-bar-selector">
+        <div class="custom-select" id="cs-inc-sel" data-value="${first.id}|${first.source}|${fmtFull(parseFloat(first.amount))}">
+          <div class="cs-trigger small" onclick="toggleCS('cs-inc-sel')">
+            <span class="cs-val">1. ${first.source} — ${fmtFull(parseFloat(first.amount))}</span>
+          </div>
+          <div class="cs-list small">${opts}</div>
+        </div>
+      </div>
       <div class="action-bar-btns">
         <button class="btn-ghost" onclick="startEditIncome()">Edit</button>
         <button class="btn-ghost danger" onclick="showIncomeConfirm()">Remove</button>
-        <button class="btn-ghost danger" onclick="confirmClearIncome()">Clear</button>
+        <button class="btn-ghost danger" onclick="showClearIncomeConfirm()">Clear All</button>
       </div>
     </div>`;
 }
 
+function getSelectedIncomeId() {
+  const val = getCSValue('cs-inc-sel');
+  return val.split('|')[0];
+}
+
 function startEditIncome() {
-  const id = $('inc-sel').value;
-  editingIncomeId = id;
-  renderIncomeEditForm();
+  editingIncomeId = getSelectedIncomeId();
   $('income-action-bar').innerHTML = '';
+  renderIncomeEditForm();
 }
 
 function renderIncomeEditForm() {
   const rec = incomeData.find(r => r.id === editingIncomeId);
   if (!rec) return;
-  const srcOpts = Object.keys(INCOME_TYPE).map(s => `<option value="${s}" ${s===rec.source?'selected':''}>${s}</option>`).join('');
-  $('income-edit-form').style.display = 'block';
+  const srcOpts = Object.keys(INCOME_TYPE).map(s =>
+    `<div class="cs-option${s===rec.source?' selected':''}" onclick="selectCS('cs-edit-inc-src','${s}',this)">${s}</div>`).join('');
   $('income-edit-form').innerHTML = `
     <div class="edit-wrap">
       <span class="edit-title">Edit Income Entry</span>
       <div class="two-col">
         <div class="field-group">
           <label class="field-label">Source</label>
-          <select id="edit-inc-source">${srcOpts}</select>
+          <div class="custom-select" id="cs-edit-inc-src" data-value="${rec.source}">
+            <div class="cs-trigger" onclick="toggleCS('cs-edit-inc-src')"><span class="cs-val">${rec.source}</span></div>
+            <div class="cs-list">${srcOpts}</div>
+          </div>
         </div>
         <div class="field-group">
           <label class="field-label">Amount (₦)</label>
@@ -1125,41 +901,49 @@ function renderIncomeEditForm() {
       <div id="edit-income-alert" class="alert"></div>
       <div class="edit-actions">
         <button class="btn-primary" onclick="saveEditIncome('${rec.id}')">Save Changes</button>
-        <button class="btn-ghost" style="padding:10px 16px;font-size:0.6rem;" onclick="cancelEditIncome()">Cancel</button>
+        <button class="edit-cancel" onclick="cancelEditIncome()">Cancel</button>
       </div>
     </div>`;
 }
 
 async function saveEditIncome(id) {
-  const source = $('edit-inc-source').value;
+  const source = getCSValue('cs-edit-inc-src');
   const amount = parseFloat($('edit-inc-amount').value);
   const notes  = $('edit-inc-notes').value;
   if (!amount || amount <= 0) { showAlert('edit-income-alert','Please enter a valid amount.','error'); return; }
   spinner(true);
   await db.from('income').delete().eq('id', id);
-  await db.from('income').insert({ user_id: currentUser.id, month_year: currentMonth, source, income_type: INCOME_TYPE[source], amount, notes });
+  await db.from('income').insert({ user_id:currentUser.id, month_year:currentMonth, source, income_type:INCOME_TYPE[source], amount, notes });
   spinner(false);
   editingIncomeId = null;
   await loadMonthData();
 }
 
-function cancelEditIncome() {
-  editingIncomeId = null;
-  renderIncome();
-}
+function cancelEditIncome() { editingIncomeId = null; renderIncome(); }
 
 function showIncomeConfirm() {
-  const id  = $('inc-sel').value;
+  const id  = getSelectedIncomeId();
   const rec = incomeData.find(r => r.id === id);
   if (!rec) return;
   $('income-action-bar').innerHTML = '';
-  $('income-confirm-box').style.display = 'block';
   $('income-confirm-box').innerHTML = `
     <div class="confirm-box">
       <div class="confirm-text">Remove <strong>${rec.source} — ${fmtFull(parseFloat(rec.amount))}</strong>?<small>This cannot be undone.</small></div>
       <div class="confirm-actions">
-        <button class="btn-ghost confirm" onclick="deleteIncome('${id}')">Yes, Remove</button>
-        <button class="btn-ghost confirm-no" onclick="cancelDeleteIncome()">Cancel</button>
+        <button class="btn-confirm-yes" onclick="deleteIncome('${id}')">Yes, Remove</button>
+        <button class="btn-confirm-no" onclick="cancelIncomeAction()">Cancel</button>
+      </div>
+    </div>`;
+}
+
+function showClearIncomeConfirm() {
+  $('income-action-bar').innerHTML = '';
+  $('income-confirm-box').innerHTML = `
+    <div class="confirm-box">
+      <div class="confirm-text">Clear <strong>all income</strong> for <strong>${currentMonth}</strong>?<small>This will permanently delete every income entry for this period.</small></div>
+      <div class="confirm-actions">
+        <button class="btn-confirm-yes" onclick="clearIncome()">Yes, Clear All</button>
+        <button class="btn-confirm-no" onclick="cancelIncomeAction()">Cancel</button>
       </div>
     </div>`;
 }
@@ -1171,26 +955,22 @@ async function deleteIncome(id) {
   await loadMonthData();
 }
 
-function cancelDeleteIncome() {
-  hide('income-confirm-box');
-  renderIncome();
-}
-
-async function confirmClearIncome() {
-  if (!confirm(`Clear all income for ${currentMonth}? This cannot be undone.`)) return;
+async function clearIncome() {
   spinner(true);
   await db.from('income').delete().eq('user_id', currentUser.id).eq('month_year', currentMonth);
   spinner(false);
   await loadMonthData();
 }
 
+function cancelIncomeAction() { editingIncomeId = null; renderIncome(); }
+
 async function addIncome() {
-  const source = $('inc-source').value;
+  const source = getCSValue('cs-inc-source');
   const amount = parseFloat($('inc-amount').value);
   const notes  = $('inc-notes').value;
   if (!amount || amount <= 0) { showAlert('add-income-alert','Please enter a valid amount.','error'); return; }
   spinner(true);
-  const { error } = await db.from('income').insert({ user_id: currentUser.id, month_year: currentMonth, source, income_type: INCOME_TYPE[source], amount, notes });
+  const { error } = await db.from('income').insert({ user_id:currentUser.id, month_year:currentMonth, source, income_type:INCOME_TYPE[source], amount, notes });
   spinner(false);
   if (error) { showAlert('add-income-alert', error.message, 'error'); return; }
   $('inc-amount').value = '';
@@ -1199,86 +979,248 @@ async function addIncome() {
   await loadMonthData();
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════
+// EXPENSES
+// ═══════════════════════════
+function renderExpenses() {
+  $('expense-edit-form').innerHTML   = '';
+  $('expense-confirm-box').innerHTML = '';
+
+  if (expenseData.length === 0) {
+    $('expense-list').innerHTML = `<div class="empty-state"><span class="empty-icon">↗</span><span class="empty-title">No expenses recorded</span><span class="empty-sub">Add your first expense entry for this period</span></div>`;
+    $('expense-action-bar').innerHTML = '';
+    return;
+  }
+
+  const total = expenseData.reduce((s,r) => s + parseFloat(r.amount), 0);
+  $('expense-list').innerHTML = `<div class="record-table">${expenseData.map(r => {
+    const share = total > 0 ? Math.round(parseFloat(r.amount)/total*100)+'%' : '0%';
+    return `<div class="record-row">
+      <div class="record-left">
+        <span class="record-name">${r.category}</span>
+        <span class="record-meta">${share} of total · ${r.description||'—'}</span>
+      </div>
+      <span class="record-amount">${fmtFull(parseFloat(r.amount))}</span>
+    </div>`;
+  }).join('')}</div>`;
+
+  if (monthLocked) { $('expense-action-bar').innerHTML = ''; return; }
+  if (editingExpenseId) { $('expense-action-bar').innerHTML = ''; renderExpenseEditForm(); return; }
+
+  const opts = expenseData.map((r,i) => `<div class="cs-option${i===0?' selected':''}" onclick="selectCS('cs-exp-sel','${r.id}|${r.category}|${fmtFull(parseFloat(r.amount))}',this)">${i+1}. ${r.category} — ${fmtFull(parseFloat(r.amount))}</div>`).join('');
+  const first = expenseData[0];
+  $('expense-action-bar').innerHTML = `
+    <div class="action-bar">
+      <div class="action-bar-selector">
+        <div class="custom-select" id="cs-exp-sel" data-value="${first.id}|${first.category}|${fmtFull(parseFloat(first.amount))}">
+          <div class="cs-trigger small" onclick="toggleCS('cs-exp-sel')">
+            <span class="cs-val">1. ${first.category} — ${fmtFull(parseFloat(first.amount))}</span>
+          </div>
+          <div class="cs-list small">${opts}</div>
+        </div>
+      </div>
+      <div class="action-bar-btns">
+        <button class="btn-ghost" onclick="startEditExpense()">Edit</button>
+        <button class="btn-ghost danger" onclick="showExpenseConfirm()">Remove</button>
+        <button class="btn-ghost danger" onclick="showClearExpenseConfirm()">Clear All</button>
+      </div>
+    </div>`;
+}
+
+function getSelectedExpenseId() {
+  const val = getCSValue('cs-exp-sel');
+  return val.split('|')[0];
+}
+
+function startEditExpense() {
+  editingExpenseId = getSelectedExpenseId();
+  $('expense-action-bar').innerHTML = '';
+  renderExpenseEditForm();
+}
+
+function renderExpenseEditForm() {
+  const CATS = ['Rent','Food','Utilities','Transport','Healthcare','Education','Subscription','Family Support'];
+  const rec  = expenseData.find(r => r.id === editingExpenseId);
+  if (!rec) return;
+  const catOpts = CATS.map(c =>
+    `<div class="cs-option${c===rec.category?' selected':''}" onclick="selectCS('cs-edit-exp-cat','${c}',this)">${c}</div>`).join('');
+  $('expense-edit-form').innerHTML = `
+    <div class="edit-wrap">
+      <span class="edit-title">Edit Expense Entry</span>
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label">Category</label>
+          <div class="custom-select" id="cs-edit-exp-cat" data-value="${rec.category}">
+            <div class="cs-trigger" onclick="toggleCS('cs-edit-exp-cat')"><span class="cs-val">${rec.category}</span></div>
+            <div class="cs-list">${catOpts}</div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Amount (₦)</label>
+          <input type="number" id="edit-exp-amount" value="${parseFloat(rec.amount)}" min="0" step="1000">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Description</label>
+        <textarea id="edit-exp-desc">${rec.description||''}</textarea>
+      </div>
+      <div id="edit-expense-alert" class="alert"></div>
+      <div class="edit-actions">
+        <button class="btn-primary" onclick="saveEditExpense('${rec.id}')">Save Changes</button>
+        <button class="edit-cancel" onclick="cancelEditExpense()">Cancel</button>
+      </div>
+    </div>`;
+}
+
+async function saveEditExpense(id) {
+  const category    = getCSValue('cs-edit-exp-cat');
+  const amount      = parseFloat($('edit-exp-amount').value);
+  const description = $('edit-exp-desc').value;
+  if (!amount || amount <= 0) { showAlert('edit-expense-alert','Please enter a valid amount.','error'); return; }
+  spinner(true);
+  await db.from('expense').delete().eq('id', id);
+  await db.from('expense').insert({ user_id:currentUser.id, month_year:currentMonth, category, amount, description });
+  spinner(false);
+  editingExpenseId = null;
+  await loadMonthData();
+}
+
+function cancelEditExpense() { editingExpenseId = null; renderExpenses(); }
+
+function showExpenseConfirm() {
+  const id  = getSelectedExpenseId();
+  const rec = expenseData.find(r => r.id === id);
+  if (!rec) return;
+  $('expense-action-bar').innerHTML = '';
+  $('expense-confirm-box').innerHTML = `
+    <div class="confirm-box">
+      <div class="confirm-text">Remove <strong>${rec.category} — ${fmtFull(parseFloat(rec.amount))}</strong>?<small>This cannot be undone.</small></div>
+      <div class="confirm-actions">
+        <button class="btn-confirm-yes" onclick="deleteExpense('${id}')">Yes, Remove</button>
+        <button class="btn-confirm-no" onclick="cancelExpenseAction()">Cancel</button>
+      </div>
+    </div>`;
+}
+
+function showClearExpenseConfirm() {
+  $('expense-action-bar').innerHTML = '';
+  $('expense-confirm-box').innerHTML = `
+    <div class="confirm-box">
+      <div class="confirm-text">Clear <strong>all expenses</strong> for <strong>${currentMonth}</strong>?<small>This will permanently delete every expense entry for this period.</small></div>
+      <div class="confirm-actions">
+        <button class="btn-confirm-yes" onclick="clearExpense()">Yes, Clear All</button>
+        <button class="btn-confirm-no" onclick="cancelExpenseAction()">Cancel</button>
+      </div>
+    </div>`;
+}
+
+async function deleteExpense(id) {
+  spinner(true);
+  await db.from('expense').delete().eq('id', id);
+  spinner(false);
+  await loadMonthData();
+}
+
+async function clearExpense() {
+  spinner(true);
+  await db.from('expense').delete().eq('user_id', currentUser.id).eq('month_year', currentMonth);
+  spinner(false);
+  await loadMonthData();
+}
+
+function cancelExpenseAction() { editingExpenseId = null; renderExpenses(); }
+
+async function addExpense() {
+  const category    = getCSValue('cs-exp-cat');
+  const amount      = parseFloat($('exp-amount').value);
+  const description = $('exp-desc').value;
+  if (!amount || amount <= 0) { showAlert('add-expense-alert','Please enter a valid amount.','error'); return; }
+  spinner(true);
+  const { error } = await db.from('expense').insert({ user_id:currentUser.id, month_year:currentMonth, category, amount, description });
+  spinner(false);
+  if (error) { showAlert('add-expense-alert', error.message, 'error'); return; }
+  $('exp-amount').value = '';
+  $('exp-desc').value   = '';
+  showAlert('add-expense-alert','Expense recorded.','success');
+  await loadMonthData();
+}
+
+// ═══════════════════════════
 // PERFORMANCE
-// ═══════════════════════════════════════
+// ═══════════════════════════
 function renderPerformance() {
-  const totalInc = incomeData.reduce((s,r)  => s + parseFloat(r.amount), 0);
-  const totalExp = expenseData.reduce((s,r) => s + parseFloat(r.amount), 0);
+  const totalInc = incomeData.reduce((s,r)  => s+parseFloat(r.amount),0);
+  const totalExp = expenseData.reduce((s,r) => s+parseFloat(r.amount),0);
   const surplus  = totalInc - totalExp;
-  const savRate  = totalInc > 0 ? surplus / totalInc * 100 : 0;
+  const savRate  = totalInc > 0 ? surplus/totalInc*100 : 0;
 
   $('kpi-income').textContent  = fmtCompact(totalInc);
   $('kpi-expense').textContent = fmtCompact(totalExp);
   $('kpi-surplus').textContent = fmtCompact(surplus);
-  $('kpi-surplus').className   = 'kpi-value-text ' + (surplus >= 0 ? 'positive' : 'negative');
+  $('kpi-surplus').className   = 'kpi-value-t ' + (surplus>=0?'pos':'neg');
 
-  const body = $('performance-body');
-  const hdr  = $('performance-expander').querySelector('.expander-header');
+  const body = $('perf-body');
+  const hdr  = $('perf-expander').querySelector('.expander-header');
 
   if (totalInc === 0) {
     body.innerHTML = `<div class="empty-state"><span class="empty-icon">◎</span><span class="empty-title">No data to analyse</span><span class="empty-sub">Record income to unlock performance insights</span></div>`;
-    hdr.classList.remove('open');
-    body.classList.remove('open');
+    hdr.classList.remove('open'); body.classList.remove('open');
     return;
   }
 
-  // Auto-expand when data exists
-  hdr.classList.add('open');
-  body.classList.add('open');
+  hdr.classList.add('open'); body.classList.add('open');
 
-  let statusCls, statusTxt;
-  if (savRate >= 30)      { statusCls='green';  statusTxt=`Savings rate ${savRate.toFixed(1)}% — strong surplus discipline`; }
-  else if (savRate >= 15) { statusCls='yellow'; statusTxt=`Savings rate ${savRate.toFixed(1)}% — stable, room to optimise`; }
-  else if (savRate >= 1)  { statusCls='yellow'; statusTxt=`Savings rate ${savRate.toFixed(1)}% — margin is thin`; }
-  else                    { statusCls='red';    statusTxt=`Deficit — expenses exceed income by ${fmtFull(Math.abs(surplus))}`; }
+  let sCls, sTxt;
+  if (savRate>=30)      { sCls='green';  sTxt=`Savings rate ${savRate.toFixed(1)}% — strong surplus discipline`; }
+  else if (savRate>=15) { sCls='yellow'; sTxt=`Savings rate ${savRate.toFixed(1)}% — stable, room to optimise`; }
+  else if (savRate>=1)  { sCls='yellow'; sTxt=`Savings rate ${savRate.toFixed(1)}% — margin is thin`; }
+  else                  { sCls='red';    sTxt=`Deficit — expenses exceed income by ${fmtFull(Math.abs(surplus))}`; }
 
-  const barPct = Math.min(Math.max(savRate, 0), 100);
+  const barPct    = Math.min(Math.max(savRate,0),100);
+  const activeInc = incomeData.filter(r=>r.income_type==='Active').reduce((s,r)=>s+parseFloat(r.amount),0);
+  const passInc   = incomeData.filter(r=>r.income_type==='Passive').reduce((s,r)=>s+parseFloat(r.amount),0);
+  const actPct    = totalInc>0 ? Math.round(activeInc/totalInc*100) : 0;
+  const pasPct    = totalInc>0 ? Math.round(passInc/totalInc*100)   : 0;
 
-  const activeInc  = incomeData.filter(r => r.income_type==='Active').reduce((s,r)=>s+parseFloat(r.amount),0);
-  const passiveInc = incomeData.filter(r => r.income_type==='Passive').reduce((s,r)=>s+parseFloat(r.amount),0);
-  const activePct  = totalInc > 0 ? Math.round(activeInc/totalInc*100) : 0;
-  const passivePct = totalInc > 0 ? Math.round(passiveInc/totalInc*100) : 0;
+  let iCls, iTxt;
+  if (actPct>=70)      { iCls='yellow'; iTxt='Income heavily effort-dependent — grow passive streams'; }
+  else if (pasPct>=50) { iCls='green';  iTxt='Passive income majority — strong foundation for wealth accumulation'; }
+  else                 { iCls='yellow'; iTxt='Moderately diversified — continue growing passive streams'; }
 
-  let incStructStatus, incStructCls;
-  if (activePct >= 70)       { incStructCls='yellow'; incStructStatus='Income heavily effort-dependent — grow passive streams'; }
-  else if (passivePct >= 50) { incStructCls='green';  incStructStatus='Passive income majority — strong foundation for wealth accumulation'; }
-  else                       { incStructCls='yellow'; incStructStatus='Moderately diversified — continue growing passive streams'; }
-
-  const sortedExp = [...expenseData].sort((a,b) => parseFloat(b.amount)-parseFloat(a.amount)).slice(0,3);
-  const costRows  = sortedExp.map(r => `
+  const topExp = [...expenseData].sort((a,b)=>parseFloat(b.amount)-parseFloat(a.amount)).slice(0,3);
+  const costRows = topExp.map(r=>`
     <div class="insight-row">
       <span class="ir-label">${r.category}</span>
       <span class="ir-value">${fmtFull(parseFloat(r.amount))}<span class="ir-sub">${totalExp>0?Math.round(parseFloat(r.amount)/totalExp*100)+'%':''}</span></span>
     </div>`).join('');
 
   body.innerHTML = `
-    <div class="status-badge ${statusCls}"><span class="status-dot"></span>${statusTxt}</div>
+    <div class="status-badge ${sCls}"><span class="status-dot"></span>${sTxt}</div>
     <div class="bar-section">
       <div class="bar-row"><span class="bar-label">Savings Rate</span><span class="bar-value">${savRate.toFixed(1)}%</span></div>
       <div class="bar-wrap"><div class="bar-fill" style="width:${barPct}%"></div></div>
     </div>
     <p class="section-sub">Income Structure</p>
-    <div class="insight-row"><span class="ir-label">Active Income</span><span class="ir-value">${fmtFull(activeInc)}<span class="ir-sub">${activePct}%</span></span></div>
-    <div class="insight-row"><span class="ir-label">Passive Income</span><span class="ir-value">${fmtFull(passiveInc)}<span class="ir-sub">${passivePct}%</span></span></div>
-    <div class="bar-section">
-      <div class="bar-row"><span class="bar-label">Passive Income Share</span><span class="bar-value">${passivePct}%</span></div>
-      <div class="bar-wrap"><div class="barf" style="height:100%;background:linear-gradient(90deg,#9a7a34,#c9a84c);width:${passivePct}%;border-radius:1px;"></div></div>
+    <div>
+      <div class="insight-row"><span class="ir-label">Active Income</span><span class="ir-value">${fmtFull(activeInc)}<span class="ir-sub">${actPct}%</span></span></div>
+      <div class="insight-row"><span class="ir-label">Passive Income</span><span class="ir-value">${fmtFull(passInc)}<span class="ir-sub">${pasPct}%</span></span></div>
     </div>
-    <div class="status-badge ${incStructCls}"><span class="status-dot"></span>${incStructStatus}</div>
-    ${expenseData.length > 0 ? `<p class="section-sub" style="margin-top:20px;">Top Cost Drivers</p><div>${costRows}</div>` : ''}`;
+    <div class="bar-section">
+      <div class="bar-row"><span class="bar-label">Passive Income Share</span><span class="bar-value">${pasPct}%</span></div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:${pasPct}%"></div></div>
+    </div>
+    <div class="status-badge ${iCls}"><span class="status-dot"></span>${iTxt}</div>
+    ${expenseData.length>0 ? `<p class="section-sub" style="margin-top:20px;">Top Cost Drivers</p><div>${costRows}</div>` : ''}`;
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════
 // ALLOCATION
-// ═══════════════════════════════════════
-let selectedAllocMode = 'Balanced (Default)';
-
+// ═══════════════════════════
 function renderAllocation() {
   const totalInc = incomeData.reduce((s,r)=>s+parseFloat(r.amount),0);
   const totalExp = expenseData.reduce((s,r)=>s+parseFloat(r.amount),0);
   const surplus  = totalInc - totalExp;
-  const body = $('allocation-body');
+  const body     = $('alloc-body');
 
   if (totalInc === 0) {
     body.innerHTML = `<div class="empty-state"><span class="empty-icon">◈</span><span class="empty-title">No surplus to allocate</span><span class="empty-sub">Record income to unlock allocation planning</span></div>`;
@@ -1289,10 +1231,11 @@ function renderAllocation() {
     return;
   }
 
-  const modeOpts = Object.keys(ALLOC_MODES).map(m => `<option value="${m}" ${m===selectedAllocMode?'selected':''}>${m}</option>`).join('');
+  const modeOpts = Object.keys(ALLOC_MODES).map(m =>
+    `<div class="cs-option${m===selectedAllocMode?' selected':''}" onclick="selectAllocMode('${m}',this)">${m}</div>`).join('');
   const mode     = ALLOC_MODES[selectedAllocMode];
   const totalPct = Object.values(mode).reduce((s,v)=>s+v,0);
-  const rows     = Object.entries(mode).map(([k,pct]) => `
+  const rows     = Object.entries(mode).map(([k,pct])=>`
     <div class="alloc-row">
       <span class="alloc-cat">${ALLOC_LABELS[k]}</span>
       <span class="alloc-pct">${pct}%</span>
@@ -1302,7 +1245,10 @@ function renderAllocation() {
   body.innerHTML = `
     <div class="field-group">
       <label class="field-label">Strategy</label>
-      <select onchange="selectedAllocMode=this.value;renderAllocation()">${modeOpts}</select>
+      <div class="custom-select" id="cs-alloc-mode" data-value="${selectedAllocMode}">
+        <div class="cs-trigger" onclick="toggleCS('cs-alloc-mode')"><span class="cs-val">${selectedAllocMode}</span></div>
+        <div class="cs-list">${modeOpts}</div>
+      </div>
     </div>
     <div class="alloc-total"><span class="at-label">Allocation Status</span><span class="at-check">✓ ${totalPct}% allocated</span></div>
     <p class="section-sub">Live allocation from current surplus</p>
@@ -1310,9 +1256,20 @@ function renderAllocation() {
     <p style="font-family:var(--font-disp);font-size:0.65rem;color:var(--cream-mute);line-height:1.6;margin-top:10px;">Updates automatically as records change. Lock the month below to permanently freeze this period.</p>`;
 }
 
-// ═══════════════════════════════════════
+function selectAllocMode(mode, el) {
+  selectedAllocMode = mode;
+  const cs = $('cs-alloc-mode');
+  cs.querySelector('.cs-val').textContent = mode;
+  cs.querySelector('.cs-list').classList.remove('open');
+  cs.querySelector('.cs-trigger').classList.remove('open');
+  cs.querySelectorAll('.cs-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  renderAllocation();
+}
+
+// ═══════════════════════════
 // LOCK MONTH
-// ═══════════════════════════════════════
+// ═══════════════════════════
 function renderLockSection() {
   const p = getPeriod();
   const sec = $('lock-section');
@@ -1324,40 +1281,37 @@ function renderLockSection() {
 
   sec.innerHTML = `
     <div class="expander" id="lock-expander">
-      <div class="expander-header" onclick="toggleExpander('lock-expander')">
-        Lock ${p.full} <span class="expander-chevron">▼</span>
-      </div>
+      <div class="expander-header" onclick="toggleExp(this)">Lock ${p.full} <span class="expander-chevron">▼</span></div>
       <div class="expander-body">
         <p style="font-family:var(--font-disp);font-size:0.78rem;color:var(--cream-dim);line-height:1.75;margin-bottom:18px;">
           Locking <strong style="color:var(--white);">${p.full}</strong> will permanently freeze all records for this period.
           Once locked, <strong style="color:var(--gold);">no entries can be added, edited, or deleted.</strong>
           This action cannot be undone.
         </p>
-        <div id="lock-alert" class="alert"></div>
-        <button class="btn-primary" style="max-width:220px;" onclick="lockMonth()">Lock ${p.full}</button>
+        <div id="lock-confirm-box"></div>
+        <button class="btn-primary" style="max-width:240px;" onclick="showLockConfirm()">Lock ${p.full}</button>
+      </div>
+    </div>`;
+}
+
+function showLockConfirm() {
+  const p = getPeriod();
+  $('lock-confirm-box').innerHTML = `
+    <div class="confirm-box" style="margin-bottom:14px;">
+      <div class="confirm-text">Permanently lock <strong>${p.full}</strong>?<small>All records will be frozen. This cannot be undone.</small></div>
+      <div class="confirm-actions">
+        <button class="btn-confirm-yes" onclick="lockMonth()">Yes, Lock Period</button>
+        <button class="btn-confirm-no" onclick="$('lock-confirm-box').innerHTML=''">Cancel</button>
       </div>
     </div>`;
 }
 
 async function lockMonth() {
-  if (!confirm(`Permanently lock ${currentMonth}? This cannot be undone.`)) return;
   spinner(true);
-  const { error } = await db.from('locked_months').insert({ user_id: currentUser.id, month_year: currentMonth });
+  const { error } = await db.from('locked_months').insert({ user_id:currentUser.id, month_year:currentMonth });
   spinner(false);
-  if (error) { showAlert('lock-alert', error.message, 'error'); return; }
+  if (error && !error.message.includes('duplicate')) { showAlert('lock-alert', error.message, 'error'); return; }
   await loadMonthData();
-}
-
-// ═══════════════════════════════════════
-// UI HELPERS
-// ═══════════════════════════════════════
-function toggleExpander(target) {
-  const el = typeof target === 'string' ? $(target) : target;
-  if (!el) return;
-  const hdr  = el.querySelector('.expander-header');
-  const body = el.querySelector('.expander-body');
-  hdr.classList.toggle('open');
-  body.classList.toggle('open');
 }
 </script>
 </body>
