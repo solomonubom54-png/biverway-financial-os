@@ -393,8 +393,16 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
     <div class="masthead-sub">Your personal wealth command center</div>
   </div>
 
-  <!-- ══════════════ AUTH SCREEN ══════════════ -->
+<!-- ══════════════ AUTH SCREEN ══════════════ -->
   <div id="auth-screen">
+
+    <div id="recovery-screen" style="display:none">
+      <span class="section-label">Set New Password</span>
+      <div class="field-group"><label class="field-label">New Password</label><input type="password" id="recovery-password" placeholder="Min. 6 characters"></div>
+      <div id="recovery-alert" class="alert"></div>
+      <button class="btn-primary" onclick="updatePassword()">Set New Password</button>
+    </div>
+
     <div id="reset-screen" style="display:none">
       <span class="section-label">Password Reset</span>
       <div class="field-group"><label class="field-label">Email address</label><input type="email" id="reset-email" placeholder="you@example.com"></div>
@@ -673,9 +681,13 @@ function toggleExp(hdrEl) {
 // INIT
 // ═══════════════════════════
 document.addEventListener('DOMContentLoaded', async () => {
-  $('footer-year').textContent = new Date().getFullYear();
+$('footer-year').textContent = new Date().getFullYear();
   buildPeriodSelects();
-
+  const hash = window.location.hash;
+  if (hash.includes('type=recovery')) {
+    hide('login-screen'); show('recovery-screen');
+  }
+   
   const { data:{ session } } = await db.auth.getSession();
   if (session) { currentUser = session.user; enterApp(); }
 
@@ -706,7 +718,7 @@ function buildPeriodSelects() {
 
 function onPeriodChange() { loadMonthData(); }
 
-// ═══════════════════════════
+/ ═══════════════════════════
 // AUTH
 // ═══════════════════════════
 function switchTab(e, tab) {
@@ -763,6 +775,21 @@ async function sendReset() {
   spinner(false);
   if (error) showAlert('reset-alert', error.message, 'error');
   else showAlert('reset-alert','Reset link sent — check your inbox.','success');
+}
+
+async function updatePassword() {
+  const pass = $('recovery-password').value;
+  if (pass.length < 6) { showAlert('recovery-alert','Password must be at least 6 characters.','error'); return; }
+  spinner(true);
+  const { error } = await db.auth.updateUser({ password: pass });
+  spinner(false);
+  if (error) { showAlert('recovery-alert', error.message, 'error'); return; }
+  showAlert('recovery-alert','Password updated. Signing you in...','success');
+  setTimeout(() => {
+    window.location.hash = '';
+    hide('recovery-screen');
+    show('login-screen');
+  }, 2000);
 }
 
 // ═══════════════════════════
