@@ -759,7 +759,7 @@ function showLoginScreen()  { hide('reset-screen'); show('login-screen'); }
 async function sendReset() {
   const email = $('reset-email').value.trim();
   spinner(true);
-  const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo: 'https://solomonubom54-png.github.io/biverway-financial-os/'
+  const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo: 'https://solomonubom54-png.github.io/biverway-financial-os/' });
   spinner(false);
   if (error) showAlert('reset-alert', error.message, 'error');
   else showAlert('reset-alert','Reset link sent — check your inbox.','success');
