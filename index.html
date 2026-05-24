@@ -726,7 +726,9 @@ function toggleCS(id) {
 }
 function selectCS(id, value, el) {
   const cs = $(id);
-  cs.querySelector('.cs-val').textContent = value;
+  const displayText = el.textContent.trim();
+  cs.querySelector('.cs-val').textContent = displayText;
+  cs.querySelector('.cs-val').style.color = '';
   cs.querySelector('.cs-list').classList.remove('open');
   cs.querySelector('.cs-trigger').classList.remove('open');
   cs.querySelectorAll('.cs-option').forEach(o => o.classList.remove('selected'));
@@ -953,11 +955,12 @@ const opts = incomeData.map((r,i) => `<div class="cs-option" onclick="selectCS('
           <div class="cs-list small">${opts}</div>
         </div>
       </div>
-      <div class="action-bar-btns">
+     <div class="action-bar-btns">
         <button class="btn-ghost" onclick="startEditIncome()">Edit</button>
         <button class="btn-ghost danger" onclick="showIncomeConfirm()">Remove</button>
         <button class="btn-ghost danger" onclick="showClearIncomeConfirm()">Clear All</button>
       </div>
+      <div id="income-sel-alert" class="alert" style="margin-top:8px;"></div>
     </div>`;
 }
 
@@ -969,7 +972,7 @@ function getSelectedIncomeId() {
 
 function startEditIncome() {
   const id = getSelectedIncomeId();
-  if (!id) { showAlert('add-income-alert','Please select a record to edit.','warning'); return; }
+  if (!id) { showAlert('income-sel-alert','Please select a record to edit.','warning'); return; }
   editingIncomeId = id;
   $('income-action-bar').innerHTML = '';
   renderIncomeEditForm();
@@ -1025,7 +1028,7 @@ function cancelEditIncome() { editingIncomeId = null; renderIncome(); }
 
 function showIncomeConfirm() {
   const id  = getSelectedIncomeId();
-  if (!id) { showAlert('add-income-alert','Please select a record to remove.','warning'); return; }
+  if (!id) { showAlert('income-sel-alert','Please select a record to remove.','warning'); return; }
   const rec = incomeData.find(r => r.id === id);
   if (!rec) return;
   $('income-action-bar').innerHTML = '';
@@ -1127,6 +1130,7 @@ const opts = expenseData.map((r,i) => `<div class="cs-option" onclick="selectCS(
         <button class="btn-ghost danger" onclick="showExpenseConfirm()">Remove</button>
         <button class="btn-ghost danger" onclick="showClearExpenseConfirm()">Clear All</button>
       </div>
+      <div id="expense-sel-alert" class="alert" style="margin-top:8px;"></div>
     </div>`;
 }
 
@@ -1138,7 +1142,7 @@ function getSelectedExpenseId() {
    
 function startEditExpense() {
   const id = getSelectedExpenseId();
-  if (!id) { showAlert('add-expense-alert','Please select a record to edit.','warning'); return; }
+  if (!id) { showAlert('expense-sel-alert','Please select a record to edit.','warning'); return; }
   editingExpenseId = id;
   $('expense-action-bar').innerHTML = '';
   renderExpenseEditForm();
@@ -1195,7 +1199,7 @@ function cancelEditExpense() { editingExpenseId = null; renderExpenses(); }
 
 function showExpenseConfirm() {
   const id  = getSelectedExpenseId();
-  if (!id) { showAlert('add-expense-alert','Please select a record to remove.','warning'); return; }
+  if (!id) { showAlert('expense-sel-alert','Please select a record to remove.','warning'); return; }
   const rec = expenseData.find(r => r.id === id);
   if (!rec) return;
   $('expense-action-bar').innerHTML = '';
