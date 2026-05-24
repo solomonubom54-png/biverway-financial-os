@@ -188,7 +188,7 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
   z-index: 999;
   display: none;
   overflow-y: auto;
-  max-height: 260px;
+  max-height: 320px;
   scrollbar-width: thin;
   scrollbar-color: var(--gold-dim) transparent;
 }
@@ -333,8 +333,8 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
 .expander-header.open { border-bottom-color: var(--gold-line); }
 .expander-chevron { font-size: 0.6rem; color: rgba(201,168,76,0.45); transition: transform 0.2s; display: inline-block; }
 .expander-header.open .expander-chevron { transform: rotate(180deg); }
-.expander-body { padding: 18px 18px 20px; display: none; }
-.expander-body.open { display: block; }
+.expander-body { padding: 18px 18px 20px; display: none; overflow: visible; }
+.expander-body.open { display: block; overflow: visible; }
 
 /* ── TABS — dark ── */
 .tabs { display: flex; border-bottom: 1px solid var(--border-md); margin-bottom: 20px; }
