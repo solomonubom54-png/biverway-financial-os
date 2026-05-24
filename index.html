@@ -188,7 +188,7 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
   z-index: 100;
   display: none;
   overflow-y: auto;
-  max-height: 220px;
+  max-height: 260px;
 }
 .cs-list.open { display: block; }
 .cs-option {
@@ -716,7 +716,7 @@ function toggleCS(id) {
   const list    = cs.querySelector('.cs-list');
   const isOpen  = list.classList.contains('open');
   document.querySelectorAll('.cs-list.open').forEach(l => { l.classList.remove('open'); l.previousElementSibling.classList.remove('open'); });
-  if (!isOpen) { list.classList.add('open'); trigger.classList.add('open'); }
+  if (!isOpen) { list.classList.add('open'); trigger.classList.add('open'); list.scrollTop = 0; }
 }
 function selectCS(id, value, el) {
   const cs = $(id);
