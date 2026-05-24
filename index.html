@@ -385,7 +385,7 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
 
 /* Text on cream = dark navy, not the global cream */
 .record-name { font-size: 0.84rem; font-weight: 600; color: var(--record-text); }
-.record-meta { font-size: 0.60rem; color: var(--record-meta); font-family: var(--font-mono); letter-spacing: 0.03em; font-weight: 300; }
+.record-meta { font-size: 0.60rem; color: var(--record-meta); font-family: var(--font-mono); letter-spacing: 0.03em; font-weight: 300; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 .record-meta span.income-type { color: var(--teal); font-weight: 400; }
 .record-amount { font-family: var(--font-mono); font-size: 1.02rem; font-weight: 700; color: var(--record-amount); flex-shrink: 0; }
 
@@ -948,7 +948,7 @@ const opts = incomeData.map((r,i) => `<div class="cs-option" onclick="selectCS('
       <div class="action-bar-selector">
         <div class="custom-select" id="cs-inc-sel" data-value="">
           <div class="cs-trigger small" onclick="toggleCS('cs-inc-sel')">
-            <span class="cs-val" style="color:var(--cream-mute);font-style:italic;">Select a record to edit or remove</span>
+            <span class="cs-val" style="color:rgba(27,38,59,0.45);font-style:italic;">Select a record to edit or remove</span>
           </div>
           <div class="cs-list small">${opts}</div>
         </div>
