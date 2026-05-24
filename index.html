@@ -189,8 +189,12 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
   display: none;
   overflow-y: auto;
   max-height: 260px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dim) transparent;
 }
 .cs-list.open { display: block; }
+.cs-list::-webkit-scrollbar { width: 3px; }
+.cs-list::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
 .cs-option {
   padding: 11px 14px;
   font-family: var(--font-disp);
@@ -199,6 +203,9 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
   cursor: pointer;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   transition: background 0.1s, color 0.1s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .cs-option:last-child { border-bottom: none; }
 .cs-option:hover { background: rgba(224,164,88,0.08); color: var(--white); }
