@@ -902,7 +902,7 @@ function renderIncome() {
     <div class="record-row">
       <div class="record-left">
         <span class="record-name">${r.source}</span>
-        <span class="record-meta">${r.income_type} · ${r.notes || '—'}</span>
+        <span class="record-meta"><span class="income-type">${r.income_type}</span> · ${r.notes || '—'}</span>
       </div>
       <span class="record-amount">${fmtFull(parseFloat(r.amount))}</span>
     </div>`).join('')}</div>`;
