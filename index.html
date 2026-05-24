@@ -163,7 +163,7 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
   transition: border-color 0.15s;
   min-height: 42px;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
   text-overflow: ellipsis;
 }
 .cs-trigger:after {
@@ -203,7 +203,7 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
 .cs-option:hover { background: rgba(255,255,255,0.04); color: var(--white); }
 .cs-option.selected { background: rgba(201,168,76,0.07); color: var(--gold); }
 
-/* ── SMALL CUSTOM SELECT (action bar) — dark ── */
+   /* ── SMALL CUSTOM SELECT (action bar) — dark ── */
 .cs-trigger.small {
   font-size: 0.72rem;
   padding: 7px 32px 7px 10px;
@@ -275,7 +275,7 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
 .btn-link:hover { color: var(--gold); }
 
 /* ── ACTION BAR — dark ── */
-.action-bar { margin-top: 10px; }
+.action-bar-selector { margin-bottom: 8px; overflow: visible; }
 .action-bar-selector { margin-bottom: 8px; }
 .action-bar-btns { display: flex; gap: 8px; flex-wrap: nowrap; }
 
