@@ -943,14 +943,13 @@ function renderIncome() {
   if (monthLocked) { $('income-action-bar').innerHTML = ''; return; }
   if (editingIncomeId) { $('income-action-bar').innerHTML = ''; renderIncomeEditForm(); return; }
 
-  const opts = incomeData.map((r,i) => `<div class="cs-option${i===0?' selected':''}" onclick="selectCS('cs-inc-sel','${r.id}|${r.source}|${fmtFull(parseFloat(r.amount))}',this)">${i+1}. ${r.source} — ${fmtFull(parseFloat(r.amount))}</div>`).join('');
-  const first = incomeData[0];
+const opts = incomeData.map((r,i) => `<div class="cs-option" onclick="selectCS('cs-inc-sel','${r.id}|${r.source}|${fmtFull(parseFloat(r.amount))}',this)">${i+1}. ${r.source} — ${fmtFull(parseFloat(r.amount))}</div>`).join('');
   $('income-action-bar').innerHTML = `
     <div class="action-bar">
       <div class="action-bar-selector">
-        <div class="custom-select" id="cs-inc-sel" data-value="${first.id}|${first.source}|${fmtFull(parseFloat(first.amount))}">
+        <div class="custom-select" id="cs-inc-sel" data-value="">
           <div class="cs-trigger small" onclick="toggleCS('cs-inc-sel')">
-            <span class="cs-val">1. ${first.source} — ${fmtFull(parseFloat(first.amount))}</span>
+            <span class="cs-val" style="color:var(--cream-mute);font-style:italic;">Select a record to edit or remove</span>
           </div>
           <div class="cs-list small">${opts}</div>
         </div>
@@ -965,11 +964,14 @@ function renderIncome() {
 
 function getSelectedIncomeId() {
   const val = getCSValue('cs-inc-sel');
+  if (!val || !val.includes('|')) return null;
   return val.split('|')[0];
 }
 
 function startEditIncome() {
-  editingIncomeId = getSelectedIncomeId();
+  const id = getSelectedIncomeId();
+  if (!id) { showAlert('add-income-alert','Please select a record to edit.','warning'); return; }
+  editingIncomeId = id;
   $('income-action-bar').innerHTML = '';
   renderIncomeEditForm();
 }
@@ -1024,6 +1026,7 @@ function cancelEditIncome() { editingIncomeId = null; renderIncome(); }
 
 function showIncomeConfirm() {
   const id  = getSelectedIncomeId();
+  if (!id) { showAlert('add-income-alert','Please select a record to remove.','warning'); return; }
   const rec = incomeData.find(r => r.id === id);
   if (!rec) return;
   $('income-action-bar').innerHTML = '';
@@ -1109,14 +1112,13 @@ function renderExpenses() {
   if (monthLocked) { $('expense-action-bar').innerHTML = ''; return; }
   if (editingExpenseId) { $('expense-action-bar').innerHTML = ''; renderExpenseEditForm(); return; }
 
-  const opts = expenseData.map((r,i) => `<div class="cs-option${i===0?' selected':''}" onclick="selectCS('cs-exp-sel','${r.id}|${r.category}|${fmtFull(parseFloat(r.amount))}',this)">${i+1}. ${r.category} — ${fmtFull(parseFloat(r.amount))}</div>`).join('');
-  const first = expenseData[0];
+const opts = expenseData.map((r,i) => `<div class="cs-option" onclick="selectCS('cs-exp-sel','${r.id}|${r.category}|${fmtFull(parseFloat(r.amount))}',this)">${i+1}. ${r.category} — ${fmtFull(parseFloat(r.amount))}</div>`).join('');
   $('expense-action-bar').innerHTML = `
     <div class="action-bar">
       <div class="action-bar-selector">
-        <div class="custom-select" id="cs-exp-sel" data-value="${first.id}|${first.category}|${fmtFull(parseFloat(first.amount))}">
+        <div class="custom-select" id="cs-exp-sel" data-value="">
           <div class="cs-trigger small" onclick="toggleCS('cs-exp-sel')">
-            <span class="cs-val">1. ${first.category} — ${fmtFull(parseFloat(first.amount))}</span>
+            <span class="cs-val" style="color:var(--cream-mute);font-style:italic;">Select a record to edit or remove</span>
           </div>
           <div class="cs-list small">${opts}</div>
         </div>
@@ -1131,11 +1133,14 @@ function renderExpenses() {
 
 function getSelectedExpenseId() {
   const val = getCSValue('cs-exp-sel');
+  if (!val || !val.includes('|')) return null;
   return val.split('|')[0];
 }
-
+   
 function startEditExpense() {
-  editingExpenseId = getSelectedExpenseId();
+  const id = getSelectedExpenseId();
+  if (!id) { showAlert('add-expense-alert','Please select a record to edit.','warning'); return; }
+  editingExpenseId = id;
   $('expense-action-bar').innerHTML = '';
   renderExpenseEditForm();
 }
@@ -1191,6 +1196,7 @@ function cancelEditExpense() { editingExpenseId = null; renderExpenses(); }
 
 function showExpenseConfirm() {
   const id  = getSelectedExpenseId();
+  if (!id) { showAlert('add-expense-alert','Please select a record to remove.','warning'); return; }
   const rec = expenseData.find(r => r.id === id);
   if (!rec) return;
   $('expense-action-bar').innerHTML = '';
