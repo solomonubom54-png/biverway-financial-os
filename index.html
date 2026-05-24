@@ -242,6 +242,25 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
 .btn-primary:hover { background: #d4b460; }
 .btn-primary:active { background: var(--gold-dim); }
 
+.btn-destructive {
+  background: #c06a3a;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-disp);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: background 0.18s;
+  width: 100%;
+  display: block;
+  margin-top: 4px;
+}
+.btn-destructive:hover { background: #a85a2e; }
+.btn-destructive:active { background: #8f4a22; }
+   
 .btn-ghost {
   background: transparent;
   color: rgba(232,224,208,0.28);
@@ -1364,7 +1383,7 @@ function renderLockSection() {
           This action cannot be undone.
         </p>
         <div id="lock-confirm-box"></div>
-        <button class="btn-primary" style="max-width:240px;" onclick="showLockConfirm()">Lock ${p.full}</button>
+        <button class="btn-destructive" style="max-width:240px;" onclick="showLockConfirm()">Lock ${p.full}</button>
       </div>
     </div>`;
 }
