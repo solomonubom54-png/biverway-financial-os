@@ -180,12 +180,12 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
 .cs-list {
   position: absolute;
   top: calc(100% + 4px);
-  left: 0; right: 0;
+  left: 0; right: auto; min-width: 180px;
   background: #1a2a40;
   border: 1px solid rgba(224,164,88,0.15);
   border-radius: var(--radius-sm);
   box-shadow: 0 16px 48px rgba(0,0,0,0.6);
-  z-index: 100;
+  z-index: 999;
   display: none;
   overflow-y: auto;
   max-height: 260px;
