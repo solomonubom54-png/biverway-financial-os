@@ -560,7 +560,7 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
             </div>
             <div class="field-group">
               <label class="field-label">Amount (₦)</label>
-              <input type="number" id="inc-amount" placeholder="0" min="0" step="1000">
+              <input type="text" id="inc-amount" placeholder="0" min="0" inputmode="numeric" onblur="fmtAmountInput(this)" onfocus="unFmtAmountInput(this)">
             </div>
           </div>
           <div class="field-group">
@@ -602,7 +602,7 @@ textarea { font-family: var(--font-disp); font-size: 0.81rem; resize: vertical; 
             </div>
             <div class="field-group">
               <label class="field-label">Amount (₦)</label>
-              <input type="number" id="exp-amount" placeholder="0" min="0" step="1000">
+              <input type="text" id="exp-amount" placeholder="0" min="0" inputmode="numeric" onblur="fmtAmountInput(this)" onfocus="unFmtAmountInput(this)">
             </div>
           </div>
           <div class="field-group">
@@ -708,6 +708,16 @@ function showAlert(id, msg, type) {
   el.textContent = msg;
   el.className = `alert show ${type}`;
   setTimeout(() => el.classList.remove('show'), 4500);
+}
+function fmtAmountInput(el) {
+  const raw = el.value.replace(/,/g, '').trim();
+  const num = parseFloat(raw);
+  if (!isNaN(num) && num > 0) {
+    el.value = num.toLocaleString('en-NG');
+  }
+}
+function unFmtAmountInput(el) {
+  el.value = el.value.replace(/,/g, '');
 }
 function getPeriod() {
   const m = $('period-month').value;
@@ -1011,7 +1021,7 @@ function renderIncomeEditForm() {
         </div>
         <div class="field-group">
           <label class="field-label">Amount (₦)</label>
-          <input type="number" id="edit-inc-amount" value="${parseFloat(rec.amount)}" min="0" step="1000">
+          <input type="text" id="edit-inc-amount" value="${parseFloat(rec.amount).toLocaleString('en-NG')}" min="0" step="1000" inputmode="numeric" onblur="fmtAmountInput(this)" onfocus="unFmtAmountInput(this)">
         </div>
       </div>
       <div class="field-group">
@@ -1028,7 +1038,7 @@ function renderIncomeEditForm() {
 
 async function saveEditIncome(id) {
   const source = getCSValue('cs-edit-inc-src');
-  const amount = parseFloat($('edit-inc-amount').value);
+  const amount = parseFloat($('edit-inc-amount').value.replace(/,/g,''));
   const notes  = $('edit-inc-notes').value;
   if (!amount || amount <= 0) { showAlert('edit-income-alert','Please enter a valid amount.','error'); return; }
   spinner(true);
@@ -1087,7 +1097,7 @@ function cancelIncomeAction() { editingIncomeId = null; renderIncome(); }
 
 async function addIncome() {
   const source = getCSValue('cs-inc-source');
-  const amount = parseFloat($('inc-amount').value);
+  const amount = parseFloat($('inc-amount').value.replace(/,/g,''));
   const notes  = $('inc-notes').value;
   if (!amount || amount <= 0) { showAlert('add-income-alert','Please enter a valid amount.','error'); return; }
   spinner(true);
@@ -1182,7 +1192,7 @@ function renderExpenseEditForm() {
         </div>
         <div class="field-group">
           <label class="field-label">Amount (₦)</label>
-          <input type="number" id="edit-exp-amount" value="${parseFloat(rec.amount)}" min="0" step="1000">
+          <input type="text" id="edit-exp-amount" value="${parseFloat(rec.amount).toLocaleString('en-NG')}" min="0" step="1000" inputmode="numeric" onblur="fmtAmountInput(this)" onfocus="unFmtAmountInput(this)">
         </div>
       </div>
       <div class="field-group">
@@ -1199,7 +1209,7 @@ function renderExpenseEditForm() {
 
 async function saveEditExpense(id) {
   const category    = getCSValue('cs-edit-exp-cat');
-  const amount      = parseFloat($('edit-exp-amount').value);
+  const amount = parseFloat($('edit-exp-amount').value.replace(/,/g,''));
   const description = $('edit-exp-desc').value;
   if (!amount || amount <= 0) { showAlert('edit-expense-alert','Please enter a valid amount.','error'); return; }
   spinner(true);
@@ -1258,7 +1268,7 @@ function cancelExpenseAction() { editingExpenseId = null; renderExpenses(); }
 
 async function addExpense() {
   const category    = getCSValue('cs-exp-cat');
-  const amount      = parseFloat($('exp-amount').value);
+  const amount = parseFloat($('exp-amount').value.replace(/,/g,''));
   const description = $('exp-desc').value;
   if (!amount || amount <= 0) { showAlert('add-expense-alert','Please enter a valid amount.','error'); return; }
   spinner(true);
